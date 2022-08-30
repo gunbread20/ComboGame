@@ -36,6 +36,12 @@ public class PlayerControl : MonoBehaviour
             if (!isJump)
             {
                 rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+                if (transform.localScale.y <= 1)
+                {
+                    transform.DOScaleY(2f, 0.1f);
+                }
+
                 isJump = true;
             }
         }
@@ -44,8 +50,17 @@ public class PlayerControl : MonoBehaviour
         {
             transform.DOScaleY(1f, 0.1f);
 
-            transform.localScale = new Vector3(oriScale.x, (oriScale.y / 2), oriScale.z);
             rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
+        }
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            transform.DOMoveX(-2f, 0.5f).SetLoops(2, LoopType.Yoyo);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            transform.DOMoveX(2f, 0.5f).SetLoops(2, LoopType.Yoyo);
         }
 
         /*
