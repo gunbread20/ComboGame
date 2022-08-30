@@ -45,12 +45,14 @@ public class PlayerControl : MonoBehaviour
                 isJump = true;
             }
         }
+
         else if (dir == SwipeDir.DOWN)
         {
             transform.DOScaleY(1f, 0.1f);
 
             rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
         }
+
         else if (dir == SwipeDir.LEFT)
         {
             if (transform.position.x != 0)
@@ -58,10 +60,12 @@ public class PlayerControl : MonoBehaviour
 
             transform.DOMoveX(-2f, 0.5f).SetLoops(2, LoopType.Yoyo);
         }
+
         else if (dir == SwipeDir.RIGHT)
         {
             if (transform.position.x != 0)
                 return;
+
             transform.DOMoveX(2f, 0.5f).SetLoops(2, LoopType.Yoyo);
         }
     }
@@ -74,41 +78,16 @@ public class PlayerControl : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (!isJump)
-            {
-                rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-                if (transform.localScale.y <= 1)
-                {
-                    transform.DOScaleY(2f, 0.1f);
-                }
-
-                isJump = true;
-            }
-        }
+            PlayerMovement(SwipeDir.UP);
 
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            transform.DOScaleY(1f, 0.1f);
-
-            rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
-        }
+            PlayerMovement(SwipeDir.DOWN);
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (transform.position.x != 0)
-                return;
-            
-            transform.DOMoveX(-2f, 0.5f).SetLoops(2, LoopType.Yoyo);
-        }
+            PlayerMovement(SwipeDir.LEFT);
 
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (transform.position.x != 0)
-                return;
-            transform.DOMoveX(2f, 0.5f).SetLoops(2, LoopType.Yoyo);
-        }
+            PlayerMovement(SwipeDir.RIGHT);
     }
 
     private void OnTriggerEnter(Collider other)
