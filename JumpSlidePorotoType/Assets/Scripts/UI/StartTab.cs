@@ -8,9 +8,9 @@ public class StartTab : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) || Input.touchCount > 0)
         {
-            GroundManager.instance.state = GameState.RUNNING;
+            GameManager.instance.state = GameState.RUNNING;
             Destroy(tabUI);
             Destroy(this.gameObject);
         }       

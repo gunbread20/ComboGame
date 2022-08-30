@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class GroundMove : MonoBehaviour
 {
+    public GroundManager groundManager;
+
     public int groundNum;
     public float moveSpeed;
     private bool jumped;
@@ -12,14 +14,14 @@ public class GroundMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = GroundManager.instance.speed;
+        moveSpeed = GroundManager.Instance.speed;
         jumped = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GroundManager.instance.state == GameState.PAUSE)
+        if (GameManager.instance.state == GameState.PAUSE)
         {
             return;
         }
@@ -28,13 +30,13 @@ public class GroundMove : MonoBehaviour
 
         if (transform.position.z <= 0 && jumped == false && groundNum != 0)
         {
-            GroundManager.instance.AddScore();
+            GameManager.instance.AddScore();
             jumped = true;
         }
 
         if (transform.position.z <= -10)
         {
-            GroundManager.instance.SpawnGround();
+            GroundManager.Instance.SpawnGround();
             Destroy(this.gameObject);
         }
     }
