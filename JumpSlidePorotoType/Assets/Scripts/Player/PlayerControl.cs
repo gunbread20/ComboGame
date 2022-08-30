@@ -115,9 +115,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
-            GameManager.instance.GameOver();
-            GameManager.instance.state = GameState.PAUSE;
             scoreManager.GameOverScore();
+            GameManager.instance.GameOver();
 
             Destroy(this.gameObject);
         }

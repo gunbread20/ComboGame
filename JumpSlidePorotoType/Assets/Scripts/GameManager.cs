@@ -20,11 +20,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject startPanel;
 
-    public Text score;
-    public int scoreCount;
-
-    public Text overScore;
-
     private void Awake()
     {
         if (instance == null)
@@ -34,18 +29,11 @@ public class GameManager : MonoBehaviour
 
         panel.SetActive(false);
         state = GameState.PAUSE;
-        scoreCount = 0;
     }
 
     public void GameOver()
     {
         panel.gameObject.SetActive(true);
-        overScore.text = "" + scoreCount;
-    }
-
-    public void AddScore()
-    {
-        scoreCount++;
-        score.text = "Score: " + scoreCount;
+        state = GameState.PAUSE;
     }
 }
