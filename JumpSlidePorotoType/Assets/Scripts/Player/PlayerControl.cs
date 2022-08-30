@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -30,6 +31,24 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (!isJump)
+            {
+                rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isJump = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            transform.DOScaleY(1f, 0.1f);
+
+            transform.localScale = new Vector3(oriScale.x, (oriScale.y / 2), oriScale.z);
+            rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
+        }
+
+        /*
         if (Input.GetKey(KeyCode.Space))
         {
             timer += Time.deltaTime;
@@ -63,6 +82,7 @@ public class PlayerControl : MonoBehaviour
                 transform.localScale = oriScale;
             }
         }
+        */
     }
 
     private void OnTriggerEnter(Collider other)
