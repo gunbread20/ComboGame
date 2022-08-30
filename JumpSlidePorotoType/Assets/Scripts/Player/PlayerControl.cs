@@ -15,10 +15,11 @@ public class PlayerControl : MonoBehaviour
 
     public float jumpForce;
 
-    // Start is called before the first frame update
+    ScoreManager scoreManager;
     void Start()
     {
         rg = GetComponent<Rigidbody>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         oriScale = transform.localScale;
         isJump = false;
     }
@@ -105,6 +106,7 @@ public class PlayerControl : MonoBehaviour
         if (other.CompareTag("Obstacle"))
         {
             GroundManager.instance.GameOver();
+            scoreManager.GameOverScore();
             GroundManager.instance.state = GameState.PAUSE;
             Destroy(this.gameObject);
         }

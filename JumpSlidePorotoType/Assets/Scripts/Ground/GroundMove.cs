@@ -9,9 +9,12 @@ public class GroundMove : MonoBehaviour
     public float moveSpeed;
     private bool jumped;
 
+    ScoreManager scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        scoreManager = FindObjectOfType<ScoreManager>();
         moveSpeed = GroundManager.instance.speed;
         jumped = false;
     }
@@ -28,7 +31,7 @@ public class GroundMove : MonoBehaviour
 
         if (transform.position.z <= 0 && jumped == false && groundNum != 0)
         {
-            GroundManager.instance.AddScore();
+            scoreManager.AddScore();
             jumped = true;
         }
 

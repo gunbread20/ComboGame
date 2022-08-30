@@ -19,10 +19,9 @@ public class GroundManager : MonoBehaviour
     public float speed;
     public GameState state;
 
-    public Text score;
-    public int scoreCount;
+    
 
-    public Text overScore;
+    
 
     private void Awake()
     {
@@ -33,7 +32,7 @@ public class GroundManager : MonoBehaviour
 
         panel.SetActive(false);
         state = GameState.PAUSE;
-        scoreCount = 0;
+        
     }
 
     public void SpawnGround()
@@ -46,17 +45,12 @@ public class GroundManager : MonoBehaviour
     public void GameOver()
     {
         panel.gameObject.SetActive(true);
-        overScore.text = "" + scoreCount;
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void AddScore()
-    {
-        scoreCount++;
-        score.text = "Score: " + scoreCount;
-    }
+    
 }
