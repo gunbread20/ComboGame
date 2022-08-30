@@ -23,6 +23,7 @@ public class GroundManager : MonoBehaviour
         Instantiate(grounds[0], new Vector3(0, 0, 0), Quaternion.identity, transform);
         Instantiate(grounds[0], new Vector3(0, 0, (groundSize)), Quaternion.identity, transform);
         Instantiate(grounds[0], new Vector3(0, 0, (groundSize * 2)), Quaternion.identity, transform);
+
     }
 
     public void SpawnGround()
@@ -31,4 +32,5 @@ public class GroundManager : MonoBehaviour
 
         Instantiate(grounds[r], new Vector3(0, 0, groundSize * 2), Quaternion.identity, transform);
     }
+
 }
