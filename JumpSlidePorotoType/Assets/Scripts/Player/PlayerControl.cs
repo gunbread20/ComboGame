@@ -35,13 +35,12 @@ public class PlayerControl : MonoBehaviour
         {
             if (!isJump)
             {
-                rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
                 if (transform.localScale.y <= 1)
                 {
                     transform.DOScaleY(2f, 0.1f);
                 }
 
+                rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isJump = true;
             }
         }
@@ -55,17 +54,19 @@ public class PlayerControl : MonoBehaviour
 
         else if (dir == SwipeDir.LEFT)
         {
-            if (transform.position.x != 0)
+            if (Mathf.Abs(transform.position.x) >= 0.3)
                 return;
 
+            transform.DOMoveX(0, 0.1f);
             transform.DOMoveX(-2f, 0.5f).SetLoops(2, LoopType.Yoyo);
         }
 
         else if (dir == SwipeDir.RIGHT)
         {
-            if (transform.position.x != 0)
+            if (Mathf.Abs(transform.position.x) >= 0.3)
                 return;
 
+            transform.DOMoveX(0, 0.1f);
             transform.DOMoveX(2f, 0.5f).SetLoops(2, LoopType.Yoyo);
         }
     }
@@ -98,12 +99,6 @@ public class PlayerControl : MonoBehaviour
             GameManager.instance.GameOver();
 
             Destroy(this.gameObject);
-        }
-
-        if (other.CompareTag("Power"))
-        {
-            Destroy(other.gameObject);
-            isJump = false;
         }
     }
 
