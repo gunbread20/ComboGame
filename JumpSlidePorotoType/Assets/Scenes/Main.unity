@@ -884,7 +884,7 @@ MonoBehaviour:
   isJump: 0
   jumpForce: 8
   slideSize: 1
-  sideLength: 2
+  sideLength: 1.5
   changeTime: 0.05
 --- !u!54 &470634150
 Rigidbody:
