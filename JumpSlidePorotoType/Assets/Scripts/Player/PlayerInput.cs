@@ -8,7 +8,8 @@ public enum SwipeDir
     DOWN,
     RIGHT,
     LEFT,
-    TOUCH
+    TOUCH,
+    NONE
 }
 
 public class PlayerInput : MonoBehaviour
@@ -17,14 +18,20 @@ public class PlayerInput : MonoBehaviour
     private Vector2 touchEndedPos;
     private Vector2 touchDif;
     private float swipeSensitivity;
+    public PlayerControl playerCon;
 
     public SwipeDir swipe;
-    public PlayerControl playerCon;
+
+
+    private void Awake()
+    {
+        playerCon = GetComponent<PlayerControl>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        swipe = SwipeDir.NONE;
     }
 
     // Update is called once per frame

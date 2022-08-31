@@ -543,7 +543,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJump: 0
-  jumpForce: 7
+  jumpForce: 6.5
+  slideSize: 1
+  sideLength: 2
+  changeTime: 0.2
 --- !u!54 &470634150
 Rigidbody:
   m_ObjectHideFlags: 0

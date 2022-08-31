@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -14,8 +13,12 @@ public class PlayerControl : MonoBehaviour
     Vector3 oriPos;
 
     public float jumpForce;
+    public float slideSize;
+    public float sideLength;
+    public float changeTime;
 
     ScoreManager scoreManager;
+
     void Start()
     {
         rg = GetComponent<Rigidbody>();
@@ -35,10 +38,8 @@ public class PlayerControl : MonoBehaviour
         {
             if (!isJump)
             {
-                if (transform.localScale.y <= 1)
-                {
-                    transform.DOScaleY(2f, 0.1f);
-                }
+                if (transform.localScale.y == slideSize)
+                    StartCoroutine("SizeUp");
 
                 rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isJump = true;
@@ -47,27 +48,26 @@ public class PlayerControl : MonoBehaviour
 
         else if (dir == SwipeDir.DOWN)
         {
-            transform.DOScaleY(1f, 0.1f);
+            if (transform.localScale.y == oriScale.y)
+                StartCoroutine("SizeDown");
 
             rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
         }
 
         else if (dir == SwipeDir.LEFT)
         {
-            if (Mathf.Abs(transform.position.x) >= 0.3)
+            if (transform.position.x == sideLength || transform.position.x == oriPos.x)
+                StartCoroutine("MoveLeft");
+            else
                 return;
-
-            transform.DOMoveX(0, 0.1f);
-            transform.DOMoveX(-2f, 0.5f).SetLoops(2, LoopType.Yoyo);
         }
 
         else if (dir == SwipeDir.RIGHT)
         {
-            if (Mathf.Abs(transform.position.x) >= 0.3)
+            if (transform.position.x == -sideLength || transform.position.x == oriPos.x)
+                StartCoroutine("MoveRight");
+            else
                 return;
-
-            transform.DOMoveX(0, 0.1f);
-            transform.DOMoveX(2f, 0.5f).SetLoops(2, LoopType.Yoyo);
         }
     }
 
@@ -108,5 +108,63 @@ public class PlayerControl : MonoBehaviour
         {
             isJump = false;
         }
+    }
+
+    IEnumerator SizeDown()
+    {
+        float t = 0;
+
+        while (transform.localScale.y > slideSize)
+        {
+            t = Mathf.Clamp(t, 0, changeTime);
+            transform.localScale = new Vector3(oriScale.x, oriScale.y - ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
+            t += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator SizeUp()
+    {
+        float t = 0;
+
+        while (transform.localScale.y < oriScale.y)
+        {
+            t = Mathf.Clamp(t, 0, changeTime);
+            transform.localScale = new Vector3(oriScale.x, slideSize + ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
+            t += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator MoveLeft()
+    {
+        float t = 0;
+        float curX = transform.position.x;
+
+        while (transform.position.x > curX - sideLength)
+        {
+            t = Mathf.Clamp(t, 0, changeTime);
+            transform.position = new Vector3(curX -(sideLength * (t / changeTime)), transform.position.y, transform.position.z);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = new Vector3(curX - sideLength, transform.position.y, transform.position.z);
+    }
+
+    IEnumerator MoveRight()
+    {
+        float t = 0;
+        float curX = transform.position.x;
+
+        while (transform.position.x < curX + sideLength)
+        {
+            t = Mathf.Clamp(t, 0, changeTime);
+            transform.position = new Vector3(curX + (sideLength * (t / changeTime)), transform.position.y, transform.position.z);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = new Vector3(curX + sideLength, transform.position.y, transform.position.z);
     }
 }
