@@ -31,7 +31,7 @@ public class GroundManager : MonoBehaviour
     {
         int r = Random.Range(0, grounds.Length);
 
-        Instantiate(grounds[r], new Vector3(0, 0, groundSize * groundCount - 1), Quaternion.identity, transform);
+        Instantiate(grounds[r], new Vector3(0, 0, groundSize * (groundCount - 1)), Quaternion.identity, transform);
     }
 
 }
