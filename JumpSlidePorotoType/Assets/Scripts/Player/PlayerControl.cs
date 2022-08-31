@@ -38,11 +38,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (!isJump)
             {
-                if (transform.localScale.y == slideSize)
-                    StartCoroutine("SizeUp");
-
-                rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                isJump = true;
+               StartCoroutine("SizeUp");
             }
         }
 
@@ -50,8 +46,6 @@ public class PlayerControl : MonoBehaviour
         {
             if (transform.localScale.y == oriScale.y)
                 StartCoroutine("SizeDown");
-
-            rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
         }
 
         else if (dir == SwipeDir.LEFT)
@@ -77,6 +71,11 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
+
+        //if (transform.position.y > 2.5f)
+        //{
+        //    transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        //}
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             PlayerMovement(SwipeDir.UP);
@@ -121,19 +120,27 @@ public class PlayerControl : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
+
+        rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
     }
 
     IEnumerator SizeUp()
     {
         float t = 0;
 
-        while (transform.localScale.y < oriScale.y)
+        if (transform.localScale.y == slideSize)
         {
-            t = Mathf.Clamp(t, 0, changeTime);
-            transform.localScale = new Vector3(oriScale.x, slideSize + ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
-            t += Time.deltaTime;
-            yield return null;
+            while (transform.localScale.y < oriScale.y)
+            {
+                t = Mathf.Clamp(t, 0, changeTime);
+                transform.localScale = new Vector3(oriScale.x, slideSize + ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
+                t += Time.deltaTime;
+                yield return null;
+            }
         }
+
+        rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isJump = true;
     }
 
     IEnumerator MoveLeft()
