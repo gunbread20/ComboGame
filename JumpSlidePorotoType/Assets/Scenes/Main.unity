@@ -2800,7 +2800,7 @@ MonoBehaviour:
   - {fileID: 6882073162587167152, guid: baeb7088ea093f047bcd190b6821773f, type: 3}
   speed: 8
   groundSize: 10
-  groundCount: 3
+  groundCount: 5
 --- !u!1 &2085904284
 GameObject:
   m_ObjectHideFlags: 3
