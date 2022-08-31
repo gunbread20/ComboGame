@@ -6,21 +6,15 @@ using UnityEngine.UI;
 public class HpBar : MonoBehaviour
 {
 
-    [SerializeField] Slider hpBar;
+    [SerializeField] Image hpBar;
 
-    void Start()
-    {
-        hpBar.value = hpBar.maxValue;
-    }
-
-    
     public void UpdateHp(float hp , float maxHp)
     {
-        hpBar.value = hp / maxHp;
+        hpBar.transform.localScale = new Vector3(hp / maxHp,1,1);
 
-        if (hpBar.value <= 0)
+        if (hp / maxHp <= 0)
         {
-            hpBar.fillRect.gameObject.SetActive(false);
+            hpBar.transform.gameObject.SetActive(false);
         }
     }
 }
