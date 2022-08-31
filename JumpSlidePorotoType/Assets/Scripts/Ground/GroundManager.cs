@@ -9,6 +9,7 @@ public class GroundManager : MonoBehaviour
     public GameObject[] grounds;
     public float speed;
     public float groundSize;
+    public int groundCount = 3;
 
     private void Awake()
     {
@@ -20,16 +21,17 @@ public class GroundManager : MonoBehaviour
 
     void Start()
     {
-        Instantiate(grounds[0], new Vector3(0, 0, 0), Quaternion.identity, transform);
-        Instantiate(grounds[0], new Vector3(0, 0, (groundSize)), Quaternion.identity, transform);
-        Instantiate(grounds[0], new Vector3(0, 0, (groundSize * 2)), Quaternion.identity, transform);
+        for (int i = 0; i < groundCount; i++)
+        {
+            Instantiate(grounds[0], new Vector3(0, 0, (groundSize * i)), Quaternion.identity, transform);
+        }
     }
 
     public void SpawnGround()
     {
         int r = Random.Range(0, grounds.Length);
 
-        Instantiate(grounds[r], new Vector3(0, 0, groundSize * 2), Quaternion.identity, transform);
+        Instantiate(grounds[r], new Vector3(0, 0, groundSize * groundCount), Quaternion.identity, transform);
     }
 
 }
