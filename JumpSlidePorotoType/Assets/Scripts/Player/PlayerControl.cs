@@ -72,9 +72,9 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (transform.position.y > 2.5f)
+        if (transform.position.y > 2.7f)
         {
-            transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+            rg.velocity = Vector3.zero;
         }
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
