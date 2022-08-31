@@ -72,10 +72,10 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        //if (transform.position.y > 2.5f)
-        //{
-        //    transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
-        //}
+        if (transform.position.y > 2.5f)
+        {
+            transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        }
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             PlayerMovement(SwipeDir.UP);
@@ -108,22 +108,6 @@ public class PlayerControl : MonoBehaviour
             isJump = false;
         }
     }
-
-    IEnumerator SizeDown()
-    {
-        float t = 0;
-
-        while (transform.localScale.y > slideSize)
-        {
-            t = Mathf.Clamp(t, 0, changeTime);
-            transform.localScale = new Vector3(oriScale.x, oriScale.y - ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
-            t += Time.deltaTime;
-            yield return null;
-        }
-
-        rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
-    }
-
     IEnumerator SizeUp()
     {
         float t = 0;
@@ -141,6 +125,21 @@ public class PlayerControl : MonoBehaviour
 
         rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isJump = true;
+    }
+
+    IEnumerator SizeDown()
+    {
+        float t = 0;
+
+        while (transform.localScale.y > slideSize)
+        {
+            t = Mathf.Clamp(t, 0, changeTime);
+            transform.localScale = new Vector3(oriScale.x, oriScale.y - ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
     }
 
     IEnumerator MoveLeft()

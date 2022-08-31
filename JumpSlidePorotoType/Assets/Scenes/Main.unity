@@ -543,10 +543,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isJump: 0
-  jumpForce: 6.5
+  jumpForce: 7
   slideSize: 1
   sideLength: 2
-  changeTime: 0.1
+  changeTime: 0.05
 --- !u!54 &470634150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2097,7 +2097,8 @@ MonoBehaviour:
   - {fileID: 6882073162587167152, guid: c08c615ee48aa7843bf7e80b2595b4dd, type: 3}
   - {fileID: 6882073162587167152, guid: ec5df0dc4695720438a9fbe85f844a6f, type: 3}
   - {fileID: 6882073162587167152, guid: 70283f1eb85d29746a9a45c6d52af23e, type: 3}
-  - {fileID: 6882073162587167152, guid: 9682d9306ff78db4294e59e38e67426f, type: 3}
+  - {fileID: 6882073162587167152, guid: b5a14033178704b4793ad9d1a689372f, type: 3}
+  - {fileID: 6882073162587167152, guid: baeb7088ea093f047bcd190b6821773f, type: 3}
   speed: 8
   groundSize: 10
 --- !u!1 &2085904284
