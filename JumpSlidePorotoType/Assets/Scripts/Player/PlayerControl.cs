@@ -74,7 +74,7 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (transform.position.y > 2.7f)
+        if (transform.position.y > 3f)
         {
             rg.velocity = Vector3.zero;
         }
