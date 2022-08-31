@@ -12,12 +12,13 @@ public class GroundMove : MonoBehaviour
     private bool jumped;
 
     ScoreManager scoreManager;
-
+    TimingManager timingManager;
     // Start is called before the first frame update
     void Start()
     {
         moveSpeed = GroundManager.Instance.speed;
         scoreManager = FindObjectOfType<ScoreManager>();
+        timingManager = FindObjectOfType<TimingManager>();
         jumped = false;
     }
 
@@ -31,9 +32,12 @@ public class GroundMove : MonoBehaviour
 
         transform.position += new Vector3(0, 0, -(Time.deltaTime) * moveSpeed);
 
+
+
         if (transform.position.z <= 0 && jumped == false && groundNum != 0)
         {
             scoreManager.AddScore();
+            //timingManager.TimingCheck(transform.position);
             jumped = true;
         }
 

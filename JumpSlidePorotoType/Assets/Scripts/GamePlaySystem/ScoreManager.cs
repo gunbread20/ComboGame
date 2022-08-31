@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
         score.text = "" + scoreCount;
 
         //ÄÞº¸ Áõ°¡
-        //comboManager.IncreaseCombo();
+        comboManager.IncreaseCombo();
     }
 
     public void GameOverScore()

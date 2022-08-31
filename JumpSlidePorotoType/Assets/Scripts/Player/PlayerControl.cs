@@ -18,11 +18,13 @@ public class PlayerControl : MonoBehaviour
     public float changeTime;
 
     ScoreManager scoreManager;
+    PlayerHealth playerHealth;
 
     void Start()
     {
         rg = GetComponent<Rigidbody>();
         scoreManager = FindObjectOfType<ScoreManager>();
+        playerHealth = GetComponent<PlayerHealth>();
         oriScale = transform.localScale;
         isJump = false;
     }
@@ -94,10 +96,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
-            scoreManager.GameOverScore();
-            GameManager.instance.GameOver();
-
-            Destroy(this.gameObject);
+            playerHealth.Damaged();
         }
     }
 
