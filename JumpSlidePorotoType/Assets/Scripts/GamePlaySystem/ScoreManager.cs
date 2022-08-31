@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     {
         //점수 증가
         scoreCount++;
-        score.text = "Score: " + scoreCount;
+        score.text = "" + scoreCount;
 
         //콤보 증가
         //comboManager.IncreaseCombo();

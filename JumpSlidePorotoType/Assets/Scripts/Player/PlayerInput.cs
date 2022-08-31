@@ -17,7 +17,7 @@ public class PlayerInput : MonoBehaviour
     private Vector2 touchBeganPos;
     private Vector2 touchEndedPos;
     private Vector2 touchDif;
-    private float swipeSensitivity;
+    public float swipeSensitivity;
     public PlayerControl playerCon;
 
     public SwipeDir swipe;

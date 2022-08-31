@@ -638,6 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63126439c2f1dd8499f48b4b7cf7ae40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swipeSensitivity: 50
   playerCon: {fileID: 0}
   swipe: 0
 --- !u!1 &567963114
@@ -2289,7 +2290,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10000
+  m_Text: 0
 --- !u!222 &1992441907
 CanvasRenderer:
   m_ObjectHideFlags: 0
