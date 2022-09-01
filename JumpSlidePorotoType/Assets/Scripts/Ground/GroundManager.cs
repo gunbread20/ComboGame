@@ -29,6 +29,9 @@ public class GroundManager : MonoBehaviour
         {
             groundPools[i] = GenericPoolManager.CratePool<GroundMove>($"Ground{i}", grounds[i], transform, 3);
         }
+
+        SpawnGround();
+        SpawnGround();
     }
 
     //void Start()
