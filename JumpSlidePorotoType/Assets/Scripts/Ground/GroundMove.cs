@@ -45,8 +45,6 @@ public class GroundMove : MonoBehaviour
 
         transform.position += new Vector3(0, 0, -(Time.deltaTime) * moveSpeed);
 
-
-
         if (transform.position.z <= 0 && jumped == false && groundNum != 0)
         {
             scoreManager.AddScore();
