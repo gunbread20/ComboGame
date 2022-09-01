@@ -15,9 +15,7 @@ public class GameManager : MonoBehaviour
     static public GameManager instance;
 
     public GameObject panel;
-    
     public GameState state;
-
     public GameObject startPanel;
 
     private void Awake()

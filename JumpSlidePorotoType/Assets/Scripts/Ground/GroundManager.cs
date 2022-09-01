@@ -11,6 +11,9 @@ public class GroundManager : MonoBehaviour
     public float groundSize;
     public int groundCount = 3;
 
+    [Range(0.01f, 1f)]
+    public float gemChance;
+
     private void Awake()
     {
         if (Instance == null)
