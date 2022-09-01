@@ -27,7 +27,7 @@ public class GroundManager : MonoBehaviour
 
         for (int i = 0; i < grounds.Length; i++)
         {
-            groundPools[i] = GenericPoolManager.CratePool<GroundMove>("Ground", grounds[i], transform, 3);
+            groundPools[i] = GenericPoolManager.CratePool<GroundMove>($"Ground{i}", grounds[i], transform, 3);
         }
     }
 

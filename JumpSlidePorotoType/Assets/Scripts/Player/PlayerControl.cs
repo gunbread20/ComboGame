@@ -98,6 +98,11 @@ public class PlayerControl : MonoBehaviour
         {
             playerHealth.Damaged();
         }
+
+        if (other.CompareTag("Gem"))
+        {
+            GameManager.instance.GetGem();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

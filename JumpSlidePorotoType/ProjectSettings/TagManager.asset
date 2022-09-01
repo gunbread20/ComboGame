@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Obstacle
   - Power
+  - Gem
   layers:
   - Default
   - TransparentFX

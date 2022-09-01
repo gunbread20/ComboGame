@@ -12,7 +12,7 @@ public class GroundMove : MonoBehaviour
     private bool jumped;
 
     [SerializeField]
-    private GameObject[] gems;
+    private GameObject gem;
 
     ScoreManager scoreManager;
     TimingManager timingManager;
@@ -20,10 +20,14 @@ public class GroundMove : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < gems.Length; i++)
-        {
-            gems[i].SetActive(false);
-        }
+
+    }
+
+    private void OnEnable()
+    {
+        gem.SetActive(false);
+        jumped = false;
+        GemSpawn();
     }
 
     void Start()
@@ -31,8 +35,6 @@ public class GroundMove : MonoBehaviour
         moveSpeed = GroundManager.Instance.speed;
         scoreManager = FindObjectOfType<ScoreManager>();
         timingManager = FindObjectOfType<TimingManager>();
-        GemSpawn();
-        jumped = false;
     }
 
     // Update is called once per frame
@@ -61,7 +63,7 @@ public class GroundMove : MonoBehaviour
 
     private void GemSpawn()
     {
-        if (gems.Length < 1)
+        if (gem == null)
         {
             return;
         }
@@ -73,8 +75,7 @@ public class GroundMove : MonoBehaviour
 
         if (rNum <= GroundManager.Instance.gemChance * 100)
         {
-            rPos = Random.Range(0, gems.Length);
-            gems[rPos].SetActive(true);
+            gem.SetActive(true);
         }
     }
 }

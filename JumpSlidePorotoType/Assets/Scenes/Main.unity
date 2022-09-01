@@ -1571,8 +1571,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.20163712, y: 0.000000016857397, z: -0.0000000034703553, w: 0.97946036}
-  m_LocalPosition: {x: 0, y: 5.73, z: -6.42}
+  m_LocalRotation: {x: 0.19996412, y: -0.3736123, z: 0.08282785, w: 0.90198}
+  m_LocalPosition: {x: 5, y: 5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2913,18 +2913,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grounds:
-  - {fileID: 5114253710512166985, guid: c4e695745a10344489e23ad4f939ae60, type: 3}
-  - {fileID: 6882073162587167152, guid: fd90521e3e8c68346a7edee0bbb781da, type: 3}
-  - {fileID: 6882073162587167152, guid: a4f8910bae41e1844bc9c449b31e4d43, type: 3}
-  - {fileID: 6882073162587167152, guid: c73e71afe79550a4dbfccea6f0ad9623, type: 3}
-  - {fileID: 6882073162587167152, guid: b5a14033178704b4793ad9d1a689372f, type: 3}
-  - {fileID: 6882073162587167152, guid: f3a2b67a44e34a2419b779c71e12a372, type: 3}
-  - {fileID: 6882073162587167152, guid: c08c615ee48aa7843bf7e80b2595b4dd, type: 3}
-  - {fileID: 6882073162587167152, guid: ec5df0dc4695720438a9fbe85f844a6f, type: 3}
-  - {fileID: 6882073162587167152, guid: 70283f1eb85d29746a9a45c6d52af23e, type: 3}
-  - {fileID: 6882073162587167152, guid: b5a14033178704b4793ad9d1a689372f, type: 3}
-  - {fileID: 6882073162587167152, guid: baeb7088ea093f047bcd190b6821773f, type: 3}
-  speed: 8
+  - {fileID: 164564372, guid: c4e695745a10344489e23ad4f939ae60, type: 3}
+  - {fileID: 1836188486487755885, guid: fd90521e3e8c68346a7edee0bbb781da, type: 3}
+  - {fileID: 1836188486487755885, guid: a4f8910bae41e1844bc9c449b31e4d43, type: 3}
+  - {fileID: 1836188486487755885, guid: c73e71afe79550a4dbfccea6f0ad9623, type: 3}
+  - {fileID: 1836188486487755885, guid: 7363e6e0d47e836459ad4f1e3a93bb1d, type: 3}
+  - {fileID: 1836188486487755885, guid: f3a2b67a44e34a2419b779c71e12a372, type: 3}
+  - {fileID: 1836188486487755885, guid: c08c615ee48aa7843bf7e80b2595b4dd, type: 3}
+  - {fileID: 1836188486487755885, guid: ec5df0dc4695720438a9fbe85f844a6f, type: 3}
+  - {fileID: 1836188486487755885, guid: 70283f1eb85d29746a9a45c6d52af23e, type: 3}
+  - {fileID: 1836188486487755885, guid: b5a14033178704b4793ad9d1a689372f, type: 3}
+  - {fileID: 1836188486487755885, guid: baeb7088ea093f047bcd190b6821773f, type: 3}
+  speed: 16
   groundSize: 10
   groundCount: 5
   gemChance: 0.1

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameState state;
     public GameObject startPanel;
 
+    private int gemCount;
+
     private void Awake()
     {
         if (instance == null)
@@ -33,5 +35,10 @@ public class GameManager : MonoBehaviour
     {
         panel.gameObject.SetActive(true);
         state = GameState.PAUSE;
+    }
+
+    public void GetGem()
+    {
+        gemCount++;
     }
 }
