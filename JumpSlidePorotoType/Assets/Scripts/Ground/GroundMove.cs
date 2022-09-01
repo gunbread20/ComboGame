@@ -57,7 +57,7 @@ public class GroundMove : MonoBehaviour
         if (transform.position.z <= -10)
         {
             GroundManager.Instance.SpawnGround();
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 
