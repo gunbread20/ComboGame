@@ -29,7 +29,7 @@ public class GenericPool<T> where T : MonoBehaviour
 
         if (queue.Count > 0)
         {
-            if (!(queue.Peek() as MonoBehaviour).gameObject.activeSelf)
+            if (!queue.Peek().gameObject.activeSelf)
             {
                 result = queue.Dequeue();
                 queue.Enqueue(result);
@@ -55,7 +55,7 @@ public class GenericPool<T> where T : MonoBehaviour
 
         if (queue.Count > 0)
         {
-            if (!(queue.Peek() as MonoBehaviour).gameObject.activeSelf)
+            if (!queue.Peek().gameObject.activeSelf)
             {
                 result = queue.Dequeue();
                 queue.Enqueue(result);
@@ -141,7 +141,7 @@ public class GenericPool<T> where T : MonoBehaviour
         T result = MonoBehaviour.Instantiate<T>(prefab, parent);
         queue.Enqueue(result);
 
-        (result as MonoBehaviour).gameObject.SetActive(false);
+        result.gameObject.SetActive(false);
 
         return result;
     }
