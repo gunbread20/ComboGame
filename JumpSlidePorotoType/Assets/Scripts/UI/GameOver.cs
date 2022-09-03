@@ -7,6 +7,7 @@ public class GameOver : MonoBehaviour
 {
     public void Restart()
     {
+        GenericPoolManager.FlushPool();
         SceneManager.LoadScene("Main");
     }
 }

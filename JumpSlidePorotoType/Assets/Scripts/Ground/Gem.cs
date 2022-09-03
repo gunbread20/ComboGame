@@ -12,6 +12,7 @@ public class Gem : MonoBehaviour
     private void OnEnable()
     {
         playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
+        GemSetting();
 
         if (playerControl == null)
         {
@@ -29,6 +30,6 @@ public class Gem : MonoBehaviour
         else if (r == 2)
             xPos = 0;
 
-        transform.position = new Vector3(xPos, 1, zPos);
+        transform.localPosition = new Vector3(xPos, 1, zPos);
     }
 }

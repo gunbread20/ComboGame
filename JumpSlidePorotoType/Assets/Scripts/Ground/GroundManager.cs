@@ -30,16 +30,20 @@ public class GroundManager : MonoBehaviour
             groundPools[i] = GenericPoolManager.CratePool<GroundMove>($"Ground{i}", grounds[i], transform, 3);
         }
 
-        SpawnGround();
-        SpawnGround();
+        float temp = gemChance;
+        gemChance = 0;
+
+        for (int i = 0; i < groundCount; i++)
+        {
+            groundPools[0].GetPoolObject(new Vector3(0, 0, groundSize * i), true);
+        }
+
+        gemChance = temp;
     }
 
     //void Start()
     //{
-    //    for (int i = 0; i < groundCount; i++)
-    //    {
-    //        Instantiate(grounds[0], new Vector3(0, 0, (groundSize * i)), Quaternion.identity, transform);
-    //    }
+    //    
     //}
 
     public void SpawnGround()

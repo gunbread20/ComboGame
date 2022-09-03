@@ -101,6 +101,7 @@ public class PlayerControl : MonoBehaviour
 
         if (other.CompareTag("Gem"))
         {
+            other.gameObject.SetActive(false);
             GameManager.instance.GetGem();
         }
     }

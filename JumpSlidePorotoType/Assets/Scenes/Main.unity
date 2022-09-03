@@ -2921,10 +2921,10 @@ MonoBehaviour:
   - {fileID: 1836188486487755885, guid: f3a2b67a44e34a2419b779c71e12a372, type: 3}
   - {fileID: 1836188486487755885, guid: c08c615ee48aa7843bf7e80b2595b4dd, type: 3}
   - {fileID: 1836188486487755885, guid: ec5df0dc4695720438a9fbe85f844a6f, type: 3}
-  - {fileID: 1836188486487755885, guid: 70283f1eb85d29746a9a45c6d52af23e, type: 3}
+  - {fileID: 1836188486487755885, guid: d26faf2ccc9a58940870c1f5f9546fca, type: 3}
   - {fileID: 1836188486487755885, guid: b5a14033178704b4793ad9d1a689372f, type: 3}
   - {fileID: 1836188486487755885, guid: baeb7088ea093f047bcd190b6821773f, type: 3}
-  speed: 16
+  speed: 8
   groundSize: 10
   groundCount: 5
   gemChance: 0.1
