@@ -27,7 +27,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        rg = GetComponent<Rigidbody>();
+        rg = GetComponentInChildren<Rigidbody>();
         scoreManager = FindObjectOfType<ScoreManager>();
         playerHealth = GetComponent<PlayerHealth>();
         oriScale = transform.localScale;
