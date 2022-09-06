@@ -16,7 +16,8 @@ public class GroundMove : MonoBehaviour
 
     ScoreManager scoreManager;
     PlayerControl playerControl;
-    // Start is called before the first frame update
+
+    public List<Vector3> objOriginPos = new List<Vector3>();
 
     private void Awake()
     {
@@ -35,9 +36,13 @@ public class GroundMove : MonoBehaviour
         moveSpeed = GroundManager.Instance.speed;
         scoreManager = FindObjectOfType<ScoreManager>();
         playerControl = FindObjectOfType<PlayerControl>();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            objOriginPos.Add(transform.GetChild(i).transform.localPosition);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.instance.state == GameState.PAUSE)
@@ -47,7 +52,7 @@ public class GroundMove : MonoBehaviour
 
         if(playerControl.isFever)
         {
-            moveSpeed = GroundManager.Instance.speed * 1.5f;
+            moveSpeed = GroundManager.Instance.speed * 2.5f;
         }
         else
         {
@@ -67,6 +72,14 @@ public class GroundMove : MonoBehaviour
         {
             GroundManager.Instance.SpawnGround();
             gameObject.SetActive(false);
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).transform.localPosition = objOriginPos[i];
+                if (transform.GetChild(i).GetComponent<Rigidbody>() == null)
+                    return;
+                transform.GetChild(i).GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
         }
     }
 

@@ -7,7 +7,6 @@ public class ScoreManager : MonoBehaviour
 {
     public Text score;
     public int scoreCount;
-    public int getScoreCount = 1;
     public Text highScore;
     public Text overScore;
 
@@ -31,7 +30,6 @@ public class ScoreManager : MonoBehaviour
         scoreCount++;
         score.text = "" + scoreCount;
 
-        scoreCount += getScoreCount;
         //ÄÞº¸ Áõ°¡
         comboManager.IncreaseCombo();
     }

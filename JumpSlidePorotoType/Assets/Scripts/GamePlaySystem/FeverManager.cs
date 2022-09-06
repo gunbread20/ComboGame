@@ -84,6 +84,8 @@ public class FeverManager : MonoBehaviour
             });
         });
     }
+
+
     void Fever(bool isFever)
     {
         playerControl.isFever = isFever;
