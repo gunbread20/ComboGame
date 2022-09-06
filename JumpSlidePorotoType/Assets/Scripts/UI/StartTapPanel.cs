@@ -9,10 +9,16 @@ public class StartTapPanel : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetKeyUp(KeyCode.Space) || Input.touchCount > 0))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             GameManager.instance.state = GameState.RUNNING;
             _startLayout.gameObject.SetActive(false);
         }
+    }
+
+    public void GameStart()
+    {
+        GameManager.instance.state = GameState.RUNNING;
+        _startLayout.gameObject.SetActive(false);
     }
 }

@@ -9,13 +9,14 @@ public class PlayerControl : MonoBehaviour
     float timer;
     [SerializeField]
     bool isJump;
+
     Vector3 oriScale;
     Vector3 oriPos;
 
     public float jumpForce;
     public float slideSize;
     public float sideLength;
-    public float changeTime;
+    public float speed;
 
     ScoreManager scoreManager;
     PlayerHealth playerHealth;
@@ -27,69 +28,6 @@ public class PlayerControl : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         oriScale = transform.localScale;
         isJump = false;
-    }
-
-    public void PlayerMovement(SwipeDir dir)
-    {
-        if (GameManager.instance.state == GameState.PAUSE)
-        {
-            return;
-        }
-
-        if (dir == SwipeDir.UP)
-        {
-            if (!isJump)
-            {
-               StartCoroutine("SizeUp");
-            }
-        }
-
-        else if (dir == SwipeDir.DOWN)
-        {
-            if (transform.localScale.y == oriScale.y)
-                StartCoroutine("SizeDown");
-        }
-
-        else if (dir == SwipeDir.LEFT)
-        {
-            if (transform.position.x == sideLength || transform.position.x == oriPos.x)
-                StartCoroutine("MoveLeft");
-            else
-                return;
-        }
-
-        else if (dir == SwipeDir.RIGHT)
-        {
-            if (transform.position.x == -sideLength || transform.position.x == oriPos.x)
-                StartCoroutine("MoveRight");
-            else
-                return;
-        }
-    }
-
-    void Update()
-    {
-        if (GameManager.instance.state == GameState.PAUSE)
-        {
-            return;
-        }
-
-        if (transform.position.y > 3f)
-        {
-            rg.velocity = Vector3.zero;
-        }
-
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            PlayerMovement(SwipeDir.UP);
-
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-            PlayerMovement(SwipeDir.DOWN);
-
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-            PlayerMovement(SwipeDir.LEFT);
-
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-            PlayerMovement(SwipeDir.RIGHT);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -113,69 +51,77 @@ public class PlayerControl : MonoBehaviour
             isJump = false;
         }
     }
-    IEnumerator SizeUp()
-    {
-        float t = 0;
 
-        if (transform.localScale.y == slideSize)
+    void Update()
+    {
+        float widthHalf = Screen.width / 2;
+
+        if (GameManager.instance.state == GameState.PAUSE)
         {
-            while (transform.localScale.y < oriScale.y)
+            return;
+        }
+
+        if (transform.position.y > 2.7f)
+        {
+            rg.velocity = Vector3.zero;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            float ClickPosX = Input.mousePosition.x - widthHalf;
+            float widthSixer = widthHalf / 12;
+
+            if (Mathf.Abs(ClickPosX) <= Mathf.Abs(widthHalf - widthSixer))
             {
-                t = Mathf.Clamp(t, 0, changeTime);
-                transform.localScale = new Vector3(oriScale.x, slideSize + ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
-                t += Time.deltaTime;
-                yield return null;
+                ClickPosX = Mathf.Clamp(ClickPosX, -(widthHalf - widthSixer), (widthHalf - widthSixer));
+                float playerPosX = sideLength * (ClickPosX / (widthHalf - widthSixer));
+                PlayerMovement(TouchStatus.DRAG, playerPosX);
+            }
+            else
+            {
+                float maxPosX = sideLength * Mathf.Sign(ClickPosX);
+                PlayerMovement(TouchStatus.DRAG, maxPosX);
             }
         }
 
-        rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        isJump = true;
+        if (Input.GetMouseButtonUp(0))
+        {
+            PlayerMovement(TouchStatus.NONE, 0);
+        }
     }
 
-    IEnumerator SizeDown()
+    public void PlayerMovement(TouchStatus dir, float playerX)
     {
-        float t = 0;
-
-        while (transform.localScale.y > slideSize)
+        if (GameManager.instance.state == GameState.PAUSE)
         {
-            t = Mathf.Clamp(t, 0, changeTime);
-            transform.localScale = new Vector3(oriScale.x, oriScale.y - ((oriScale.y - slideSize) * (t / changeTime)), oriScale.z);
-            t += Time.deltaTime;
-            yield return null;
+            return;
         }
 
-        rg.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
-    }
-
-    IEnumerator MoveLeft()
-    {
-        float t = 0;
-        float curX = transform.position.x;
-
-        while (transform.position.x > curX - sideLength)
+        if (dir == TouchStatus.DRAG)
         {
-            t = Mathf.Clamp(t, 0, changeTime);
-            transform.position = new Vector3(curX -(sideLength * (t / changeTime)), transform.position.y, transform.position.z);
-            t += Time.deltaTime;
-            yield return null;
+            float way = Mathf.Sign(playerX - transform.position.x);
+            float xSpeed = way * speed * Time.deltaTime;
+            if (Mathf.Abs(playerX - transform.position.x) > 0.05)
+            {
+                if (Mathf.Abs(transform.position.x + xSpeed) <= sideLength)
+                {
+                    transform.position += new Vector3(xSpeed, 0, 0);
+                }
+                else
+                {
+                    transform.position = new Vector3(sideLength * way, transform.position.y, transform.position.z);
+                }
+
+            }
         }
 
-        transform.position = new Vector3(curX - sideLength, transform.position.y, transform.position.z);
-    }
-
-    IEnumerator MoveRight()
-    {
-        float t = 0;
-        float curX = transform.position.x;
-
-        while (transform.position.x < curX + sideLength)
+        if (dir == TouchStatus.NONE)
         {
-            t = Mathf.Clamp(t, 0, changeTime);
-            transform.position = new Vector3(curX + (sideLength * (t / changeTime)), transform.position.y, transform.position.z);
-            t += Time.deltaTime;
-            yield return null;
+            if (!isJump)
+            {
+                rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isJump = true;
+            }
         }
-
-        transform.position = new Vector3(curX + sideLength, transform.position.y, transform.position.z);
     }
 }

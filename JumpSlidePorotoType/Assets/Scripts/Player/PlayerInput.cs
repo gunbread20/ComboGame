@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SwipeDir
+public enum TouchStatus
 { 
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    TOUCH,
+    DRAG,
     NONE
 }
 
@@ -20,8 +16,12 @@ public class PlayerInput : MonoBehaviour
     public float swipeSensitivity;
     public PlayerControl playerCon;
 
-    public SwipeDir swipe;
+    public TouchStatus touchStatus;
 
+    private float widthHalf;
+    private float sideLength;
+
+    private float tTime;
 
     private void Awake()
     {
@@ -31,53 +31,37 @@ public class PlayerInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        swipe = SwipeDir.NONE;
+        touchStatus = TouchStatus.NONE;
+        sideLength = playerCon.sideLength;
     }
 
     // Update is called once per frame
     void Update()
     {
+        widthHalf = Screen.width / 2;
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+            tTime += touch.deltaTime;
+            float touchPosX = touch.position.x - widthHalf;
+            float widthSixer = widthHalf / 12;
 
-            if (touch.phase == TouchPhase.Began)
+            if (Mathf.Abs(touchPosX) <= Mathf.Abs(widthHalf - widthSixer))
             {
-                touchBeganPos = touch.position;
+                touchPosX = Mathf.Clamp(touchPosX, -(widthHalf - widthSixer), (widthHalf - widthSixer));
+                float playerPosX = sideLength * (touchPosX / (widthHalf - widthSixer));
+                playerCon.PlayerMovement(this.touchStatus, playerPosX);
             }
 
-            if (touch.phase == TouchPhase.Ended)
-            {
-                touchEndedPos = touch.position;
-                touchDif = (touchEndedPos - touchBeganPos);
+            
+        }
 
-                if (Mathf.Abs(touchDif.y) > swipeSensitivity || Mathf.Abs(touchDif.x) > swipeSensitivity)
-                {
-                    if (touchDif.y > 0 && Mathf.Abs(touchDif.y) > Mathf.Abs(touchDif.x))
-                    {
-                        swipe = SwipeDir.UP;
-                    }
-                    else if (touchDif.y < 0 && Mathf.Abs(touchDif.y) > Mathf.Abs(touchDif.x))
-                    {
-                        swipe = SwipeDir.DOWN;
-                    }
-                    else if (touchDif.x > 0 && Mathf.Abs(touchDif.x) > Mathf.Abs(touchDif.y))
-                    {
-                        swipe = SwipeDir.RIGHT;
-                    }
-                    else if (touchDif.x < 0 && Mathf.Abs(touchDif.x) > Mathf.Abs(touchDif.y))
-                    {
-                        swipe = SwipeDir.LEFT;
-                    }
-                }
-
-                else
-                {
-                    swipe = SwipeDir.TOUCH;
-                }
-
-                playerCon.PlayerMovement(swipe);
-            }
+        else if (tTime != 0)
+        {
+            touchStatus = TouchStatus.NONE;
+            playerCon.PlayerMovement(touchStatus, 0);
+            tTime = 0;
         }
     }
 }

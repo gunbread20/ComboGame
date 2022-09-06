@@ -23,10 +23,20 @@ public class PlayerHealth : MonoBehaviour
         comboManager = FindObjectOfType<ComboManager>();
 
         _maxHp = _hp;
+        hpBar.gameObject.SetActive(false);
     }
 
     private void Update()
     {
+        if (GameManager.instance.state == GameState.RUNNING)
+        {
+            hpBar.gameObject.SetActive(true);
+        }
+        else
+        {
+            hpBar.gameObject.SetActive(false);
+        }
+
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
