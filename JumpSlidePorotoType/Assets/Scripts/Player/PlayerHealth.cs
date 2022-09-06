@@ -47,6 +47,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void FeverTouch(GameObject gameObject, Vector3 dir)
+    {
+        gameObject.GetComponent<Rigidbody>().AddForce(dir * 1000, ForceMode.Force);
+
+        ShakeCamera(3f);
+    }
+
     public void Damaged()
     {
         // 체력 감소

@@ -18,6 +18,8 @@ public class PlayerControl : MonoBehaviour
     public float sideLength;
     public float speed;
 
+    public bool isFever = false;
+
     ScoreManager scoreManager;
     PlayerHealth playerHealth;
 
@@ -34,6 +36,11 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
+            if(isFever)
+            {
+                playerHealth.FeverTouch(other.gameObject, other.ClosestPoint(transform.position));
+                return;
+            }
             playerHealth.Damaged();
         }
 

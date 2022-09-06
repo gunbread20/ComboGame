@@ -15,7 +15,7 @@ public class GroundMove : MonoBehaviour
     private GameObject gem;
 
     ScoreManager scoreManager;
-    TimingManager timingManager;
+    PlayerControl playerControl;
     // Start is called before the first frame update
 
     private void Awake()
@@ -34,7 +34,7 @@ public class GroundMove : MonoBehaviour
     {
         moveSpeed = GroundManager.Instance.speed;
         scoreManager = FindObjectOfType<ScoreManager>();
-        timingManager = FindObjectOfType<TimingManager>();
+        playerControl = FindObjectOfType<PlayerControl>();
     }
 
     // Update is called once per frame
@@ -43,6 +43,15 @@ public class GroundMove : MonoBehaviour
         if (GameManager.instance.state == GameState.PAUSE)
         {
             return;
+        }
+
+        if(playerControl.isFever)
+        {
+            moveSpeed = GroundManager.Instance.speed * 1.5f;
+        }
+        else
+        {
+            moveSpeed = GroundManager.Instance.speed;
         }
 
         transform.position += new Vector3(0, 0, -(Time.deltaTime) * moveSpeed);
