@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     float timer;
     [SerializeField]
     bool isJump;
+    bool isInvincible;
 
     Vector3 oriScale;
     Vector3 oriPos;
@@ -17,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     public float slideSize;
     public float sideLength;
     public float speed;
+    public float invincibleTime;
 
     public bool isFever = false;
 
@@ -30,6 +32,7 @@ public class PlayerControl : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         oriScale = transform.localScale;
         isJump = false;
+        isInvincible = false;
     }
 
     private void OnTriggerEnter(Collider other)
