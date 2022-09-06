@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class StartTapPanel : MonoBehaviour
 {
+    public Button _btnStart; 
     public GameObject _startLayout;
 
-    private void Update()
+    private void Awake()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            GameManager.instance.state = GameState.RUNNING;
-            _startLayout.gameObject.SetActive(false);
-        }
+        _btnStart.onClick.AddListener(GameStart);
     }
 
     public void GameStart()
