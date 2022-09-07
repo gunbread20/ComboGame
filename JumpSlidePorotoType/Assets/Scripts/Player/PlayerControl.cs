@@ -44,7 +44,16 @@ public class PlayerControl : MonoBehaviour
                 playerHealth.FeverTouch(other.gameObject, other.ClosestPoint(transform.position));
                 return;
             }
-            playerHealth.Damaged();
+            else if (isInvincible)
+            {
+                
+            }
+            else
+            {
+                playerHealth.Damaged();
+                isInvincible = true;
+                Invoke("InvincibleOff", invincibleTime);
+            }  
         }
 
         if (other.CompareTag("Gem"))
@@ -52,6 +61,11 @@ public class PlayerControl : MonoBehaviour
             other.gameObject.SetActive(false);
             GameManager.instance.GetGem();
         }
+    }
+
+    private void InvincibleOff()
+    {
+        isInvincible = false;
     }
 
     private void OnCollisionEnter(Collision collision)
