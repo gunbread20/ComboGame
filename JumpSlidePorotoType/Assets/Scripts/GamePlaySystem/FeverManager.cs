@@ -29,13 +29,17 @@ public class FeverManager : MonoBehaviour
 
     private void Update()
     {
-        if (comboManager.currentCombo >= 10 && feverTime > 0 && coolTime <= 0)
+        if (comboManager.currentCombo >= 10 && feverBar.value >= feverBar.maxValue)
         {
             OnFever();
         }
-        if (feverBar.value <= 0)
+        else if (feverBar.value < feverBar.maxValue && feverTime <= 0)
         {
             OffFever();
+        }
+        else if (coolTime <= 0)
+        {
+            ChargeFever();
         }
     }
 
@@ -58,6 +62,11 @@ public class FeverManager : MonoBehaviour
         isInit = false;
     }
 
+    public void ChargeFever()
+    {
+
+    }
+
     public void OffFever()
     {
         if(!isInit)
@@ -68,7 +77,7 @@ public class FeverManager : MonoBehaviour
         Fever(false);
 
 
-        feverBar.gameObject.SetActive(false);
+        feverBar.value = comboManager.currentCombo / 10f;
         coolTime -= Time.deltaTime;
         isInit = true;
     }

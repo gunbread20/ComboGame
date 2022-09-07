@@ -8,6 +8,14 @@ public class HpBar : MonoBehaviour
 
     [SerializeField] Image hpBar;
 
+
+    private void Update()
+    {
+        if(GameManager.instance.state == GameState.RUNNING)
+        {
+            hpBar.gameObject.SetActive(true);
+        }
+    }
     public void UpdateHp(float hp , float maxHp)
     {
         hpBar.transform.localScale = new Vector3(hp / maxHp,1,1);

@@ -1014,6 +1014,7 @@ MonoBehaviour:
   slideSize: 1
   sideLength: 1.5
   speed: 10
+  invincibleTime: 0
   isFever: 0
 --- !u!54 &470634150
 Rigidbody:
@@ -1808,7 +1809,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 1992441906}
   scoreCount: 0
-  getScoreCount: 1
   highScore: {fileID: 319568466}
   overScore: {fileID: 1180593252}
   newRecord: {fileID: 526912662}
