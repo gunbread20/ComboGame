@@ -19,6 +19,8 @@ public class GroundMove : MonoBehaviour
 
     public List<Vector3> objOriginPos = new List<Vector3>();
 
+    float time;
+
     private void Awake()
     {
 
@@ -56,7 +58,9 @@ public class GroundMove : MonoBehaviour
         }
         else
         {
-            moveSpeed = GroundManager.Instance.speed;
+            time += Time.deltaTime * 1f;
+
+            moveSpeed =  Mathf.Lerp(moveSpeed, GroundManager.Instance.speed, time);
         }
 
         transform.position += new Vector3(0, 0, -(Time.deltaTime) * moveSpeed);
