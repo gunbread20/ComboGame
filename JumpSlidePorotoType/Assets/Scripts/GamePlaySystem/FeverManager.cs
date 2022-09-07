@@ -30,18 +30,15 @@ public class FeverManager : MonoBehaviour
         if (comboManager.currentCombo >= 10 && feverTime > 0 && coolTime <= 0)
         {
             OnFever();
-            Debug.Log("피버중");
         }
         else if (feverBar.value <= 0)
         {
             OffFever();
-            Debug.Log("쉬는타이밍");
 
         }
         else if (coolTime <= 0)
         {
             ChargeFever();
-            Debug.Log("피버 충전중");
         }
     }
 
@@ -60,14 +57,6 @@ public class FeverManager : MonoBehaviour
 
         feverBar.value = feverTime / 5f;
 
-        
-
-
-        if(feverTime < 1)
-        {
-                
-        }
-
         isInit = false;
     }
 
@@ -82,12 +71,19 @@ public class FeverManager : MonoBehaviour
         {
             feverTime = 5f;
             coolTime = 15f;
+            playerControl.isInvincible = true;
+            Invoke("InvincibleOff", playerControl.invincibleTime);
         }
         Fever(false);
 
 
         coolTime -= Time.deltaTime;
         isInit = true;
+    }
+
+    public void InvincibleOff()
+    {
+        playerControl.InvincibleOff();
     }
 
     IEnumerator Fever()

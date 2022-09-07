@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     bool isJump;
     bool startJump;
-    bool isInvincible;
+    public bool isInvincible;
 
     Vector3 oriScale;
     Vector3 oriPos;
@@ -48,15 +49,18 @@ public class PlayerControl : MonoBehaviour
             }
             else if (isInvincible)
             {
-                
+                Debug.Log("무적상태");
             }
             else
             {
                 playerHealth.Damaged();
+                InvincibleEffect();
                 isInvincible = true;
                 Invoke("InvincibleOff", invincibleTime);
             }  
         }
+
+
 
         if (other.CompareTag("Gem"))
         {
@@ -65,7 +69,17 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void InvincibleOff()
+    public void InvincibleEffect()
+    {
+
+        Debug.Log(GetComponentInChildren<MeshRenderer>().materials[0]);
+        GetComponentInChildren<MeshRenderer>().materials[0].DOFade(0, 0.3f).OnComplete(() =>
+        {
+            GetComponentInChildren<MeshRenderer>().materials[0].DOFade(1, 0.3f);
+        });
+    }
+
+    public void InvincibleOff()
     {
         isInvincible = false;
     }
@@ -77,6 +91,7 @@ public class PlayerControl : MonoBehaviour
             isJump = false;
         }
     }
+
 
     void Update()
     {
