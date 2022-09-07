@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GroundManager : MonoBehaviour
 {
     static public GroundManager Instance;
 
     public GroundMove[] grounds;
-    public float speed;
+    public UnityEvent speedUp;
+    public UnityEvent speedClear;
+
+    public float speed = 8;
+    public float minSpeed = 8;
+    public float maxSpeed = 16;
+    public float addSpeed = 0.1f;
+
     public float groundSize;
     public int groundCount = 3;
 
@@ -41,10 +49,11 @@ public class GroundManager : MonoBehaviour
         gemChance = temp;
     }
 
-    //void Start()
-    //{
-    //    
-    //}
+    void Start()
+    {
+        speedUp.AddListener(GroundSpeedUp);
+        speedClear.AddListener(GroundSpeedClear);
+    }
 
     public void SpawnGround()
     {
@@ -54,4 +63,16 @@ public class GroundManager : MonoBehaviour
         //Instantiate(grounds[r], new Vector3(0, 0, groundSize * (groundCount - 1)), Quaternion.identity, transform);
     }
 
+    private void GroundSpeedUp()
+    {
+        speed += addSpeed;
+
+        if (speed > maxSpeed)
+            speed = maxSpeed;
+    }
+
+    private void GroundSpeedClear()
+    {
+        speed = minSpeed;
+    }
 }

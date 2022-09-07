@@ -16,7 +16,12 @@ public class PlayerControl : MonoBehaviour
     Vector3 oriScale;
     Vector3 oriPos;
 
-    public float jumpForce;
+    public float jumpForce = 7;
+    public float jumpHight = 2.4f;
+    public float minJumpForce = 7;
+    public float maxJumpForce = 9;
+    public float addJumpForce = 0.025f;
+
     public float slideSize;
     public float sideLength;
     public float speed;
@@ -29,6 +34,9 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
+        GroundManager.Instance.speedUp.AddListener(PlayerJumpUp);
+        GroundManager.Instance.speedClear.AddListener(PlayerJumpClear);
+
         rg = GetComponentInChildren<Rigidbody>();
         scoreManager = FindObjectOfType<ScoreManager>();
         playerHealth = GetComponent<PlayerHealth>();
@@ -103,9 +111,10 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (transform.position.y > 2.7f)
+        if (transform.position.y > jumpHight)
         {
             rg.velocity = Vector3.zero;
+            rg.velocity = (Vector3.down * (jumpForce / 2));
         }
 
         if (Input.GetMouseButton(0))
@@ -170,5 +179,17 @@ public class PlayerControl : MonoBehaviour
                 isJump = true;
             }
         }
+    }
+
+    private void PlayerJumpUp()
+    {
+        jumpForce += addJumpForce;
+        if (jumpForce > maxJumpForce)
+            jumpForce = maxJumpForce;
+    }
+
+    private void PlayerJumpClear()
+    {
+        jumpForce = minJumpForce;
     }
 }
