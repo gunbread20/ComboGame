@@ -71,12 +71,8 @@ public class PlayerControl : MonoBehaviour
 
     public void InvincibleEffect()
     {
-
         Debug.Log(GetComponentInChildren<MeshRenderer>().materials[0]);
-        GetComponentInChildren<MeshRenderer>().materials[0].DOFade(0, 0.3f).OnComplete(() =>
-        {
-            GetComponentInChildren<MeshRenderer>().materials[0].DOFade(1, 0.3f);
-        });
+        GetComponentInChildren<MeshRenderer>().materials[0].DOFade(0, 0.3f).SetLoops(6, LoopType.Yoyo);
     }
 
     public void InvincibleOff()
