@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public enum GameState
 {
@@ -22,8 +21,6 @@ public class GameManager : MonoBehaviour
 
     public int gemCount;
     public int highScore;
-
-    public UnityEvent<int> speedUp;
 
     private void Awake()
     {
