@@ -6,7 +6,6 @@ using DG.Tweening;
 
 public class FeverManager : MonoBehaviour
 {
-    ScoreManager scoreManager;
     ComboManager comboManager;
 
     public float feverTime = 5f;
@@ -22,24 +21,27 @@ public class FeverManager : MonoBehaviour
     private void Start()
     {
         playerControl = FindObjectOfType<PlayerControl>();
-        scoreManager = FindObjectOfType<ScoreManager>();
         comboManager = FindObjectOfType<ComboManager>();
-        coolTime = 0;
+        coolTime = 0f;
     }
 
     private void Update()
     {
-        if (comboManager.currentCombo >= 10 && feverBar.value >= feverBar.maxValue)
+        if (comboManager.currentCombo >= 10 && feverTime > 0 && coolTime <= 0)
         {
             OnFever();
+            Debug.Log("피버중");
         }
-        else if (feverBar.value < feverBar.maxValue && feverTime <= 0)
+        else if (feverBar.value <= 0)
         {
             OffFever();
+            Debug.Log("쉬는타이밍");
+
         }
         else if (coolTime <= 0)
         {
             ChargeFever();
+            Debug.Log("피버 충전중");
         }
     }
 
@@ -47,6 +49,7 @@ public class FeverManager : MonoBehaviour
     {
         if(isInit)
         {
+            StartCoroutine(Fever());
             FeverTextAnim();
         }
 
@@ -57,14 +60,20 @@ public class FeverManager : MonoBehaviour
 
         feverBar.value = feverTime / 5f;
 
-        Fever(true);
+        
+
+
+        if(feverTime < 1)
+        {
+                
+        }
 
         isInit = false;
     }
 
     public void ChargeFever()
     {
-
+        feverBar.value = comboManager.currentCombo / 10f;
     }
 
     public void OffFever()
@@ -77,17 +86,25 @@ public class FeverManager : MonoBehaviour
         Fever(false);
 
 
-        feverBar.value = comboManager.currentCombo / 10f;
         coolTime -= Time.deltaTime;
         isInit = true;
     }
 
+    IEnumerator Fever()
+    {
+        Time.timeScale = 0.2f;
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        Time.timeScale = 1;
+    }
 
     void FeverTextAnim()
     {
-        feverText.rectTransform.DOAnchorPos(new Vector2(0f, 0f), 1f).SetEase(Ease.OutSine).OnComplete(() =>
+        feverText.rectTransform.DOAnchorPos(new Vector2(0f, 0f), 1f).SetUpdate(true).SetEase(Ease.OutSine).OnComplete(() =>
         {
-            feverText.rectTransform.DOAnchorPos(new Vector2(-1000f, 0f), 1f).OnComplete(() =>
+            Fever(true);
+            feverText.rectTransform.DOAnchorPos(new Vector2(-1000f, 0f), 1f).SetUpdate(true).OnComplete(() =>
             {
                 feverText.rectTransform.anchoredPosition = new Vector3(1000f, 0f);
             });
