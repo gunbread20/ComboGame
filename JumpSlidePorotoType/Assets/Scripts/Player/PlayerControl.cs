@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     float timer;
     [SerializeField]
     bool isJump;
+    bool startJump;
     bool isInvincible;
 
     Vector3 oriScale;
@@ -33,6 +34,7 @@ public class PlayerControl : MonoBehaviour
         oriScale = transform.localScale;
         isJump = false;
         isInvincible = false;
+        startJump = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -84,6 +86,11 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
+        else if (startJump == false)
+        {
+            Invoke("StartJumpCancle", 0.5f);
+            return;
+        }
 
         if (transform.position.y > 2.7f)
         {
@@ -112,6 +119,11 @@ public class PlayerControl : MonoBehaviour
         {
             PlayerMovement(TouchStatus.NONE, 0);
         }
+    }
+
+    private void StartJumpCancle()
+    {
+        startJump = true;
     }
 
     public void PlayerMovement(TouchStatus dir, float playerX)
