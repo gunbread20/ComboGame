@@ -17,7 +17,7 @@ public class PlayerTrail : MonoBehaviour
         lr.positionCount = maxPoint;
         TrailPoint curTrailPoint = null;
         TrailPoint lastTrailPoint = null;
-        for (int i = maxPoint; i > 0; i--)
+        for (int i = maxPoint - 1; i >= 0; i--)
         {
             float depth = Mathf.Lerp(transform.position.z, player.position.z, (float)i / maxPoint);
 
