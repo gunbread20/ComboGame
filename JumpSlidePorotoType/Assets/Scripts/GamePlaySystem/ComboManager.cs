@@ -16,16 +16,12 @@ public class ComboManager : MonoBehaviour
         currentCombo += giveComboCnt;
         if (currentCombo >= 3)
             ShowComboText();
-        if (currentCombo % 10 == 1 && currentCombo != 0)
-            GroundManager.Instance.speedUp.Invoke();
-
+        
         UpdateComboText();
     }
 
     public void  ResetCombo()
     {
-        GroundManager.Instance.speedClear.Invoke();
-
         HideComboText();
         currentCombo = 0;
         UpdateComboText();

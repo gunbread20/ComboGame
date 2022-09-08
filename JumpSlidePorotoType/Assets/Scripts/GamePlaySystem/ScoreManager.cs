@@ -32,6 +32,9 @@ public class ScoreManager : MonoBehaviour
 
         //ÄÞº¸ Áõ°¡
         comboManager.IncreaseCombo();
+
+        if (scoreCount % 10 == 0 && scoreCount != 0)
+            GroundManager.Instance.speedUp.Invoke();
     }
 
     public void GameOverScore()

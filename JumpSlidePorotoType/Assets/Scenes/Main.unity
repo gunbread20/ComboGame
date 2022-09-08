@@ -1163,8 +1163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isJump: 0
   isInvincible: 0
-  jumpForce: 8
-  jumpHight: 2.4
+  jumpForce: 7
+  jumpHight: 2.5
   minJumpForce: 7
   maxJumpForce: 9
   addJumpForce: 0.025
@@ -3020,9 +3020,6 @@ MonoBehaviour:
   startPanel: {fileID: 0}
   gemCount: 0
   highScore: 0
-  speedUp:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1813588130
 Transform:
   m_ObjectHideFlags: 0
