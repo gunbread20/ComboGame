@@ -44,7 +44,6 @@ public class FeverManager : MonoBehaviour
      
         if (coolTime <= 0 && !playerControl.isFever)
         {
-            Debug.Log("asd");
             ChargeFever();
         }
     }

@@ -33,7 +33,7 @@ public class ScoreManager : MonoBehaviour
         //ÄÞº¸ Áõ°¡
         comboManager.IncreaseCombo();
 
-        if (scoreCount % 10 == 0 && scoreCount != 0)
+        if (scoreCount % 5 == 0 && scoreCount != 0)
             GroundManager.Instance.speedUp.Invoke();
     }
 

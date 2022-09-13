@@ -19,11 +19,15 @@ public class GroundMove : MonoBehaviour
 
     public List<Vector3> objOriginPos = new List<Vector3>();
 
+    float feverSpeed;
+    float slowTime;
     float time;
 
     private void Awake()
     {
-
+        time = 0;
+        feverSpeed = 1;
+        slowTime = GroundManager.Instance.feverSlowTime;
     }
 
     private void OnEnable()
@@ -54,15 +58,14 @@ public class GroundMove : MonoBehaviour
 
         if(playerControl.isFever)
         {
-            moveSpeed = GroundManager.Instance.speed * 2.5f;
+            feverSpeed = 2.5f;
         }
         else
         {
-            time += Time.deltaTime * 1f;
-
-            moveSpeed =  Mathf.Lerp(moveSpeed, GroundManager.Instance.speed, time);
+            feverSpeed = 1;
         }
 
+        moveSpeed = GroundManager.Instance.speed * feverSpeed;
         transform.position += new Vector3(0, 0, -(Time.deltaTime) * moveSpeed);
 
         if (transform.position.z <= 0 && jumped == false && groundNum != 0)

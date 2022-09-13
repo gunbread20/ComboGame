@@ -15,6 +15,9 @@ public class GroundManager : MonoBehaviour
     public float minSpeed = 8;
     public float maxSpeed = 16;
     public float addSpeed = 0.1f;
+    public float feverSlowTime = 1;
+
+    private GameObject lastPiece;
 
     public float groundSize;
     public int groundCount = 3;
@@ -43,7 +46,13 @@ public class GroundManager : MonoBehaviour
 
         for (int i = 0; i < groundCount; i++)
         {
-            groundPools[0].GetPoolObject(new Vector3(0, 0, groundSize * i), true);
+            if (i == groundCount - 1)
+            {
+                GroundMove nm = groundPools[0].GetPoolObject(new Vector3(0, 0, groundSize * i), true);
+                lastPiece = nm.gameObject;
+            }
+            else
+                groundPools[0].GetPoolObject(new Vector3(0, 0, groundSize * i), true);
         }
 
         gemChance = temp;
@@ -59,13 +68,17 @@ public class GroundManager : MonoBehaviour
     {
         int r = Random.Range(0, grounds.Length);
 
-        groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize * (groundCount - 1)), true);
+        Vector3 lastPos = lastPiece.transform.position;
+        GroundMove nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
         //Instantiate(grounds[r], new Vector3(0, 0, groundSize * (groundCount - 1)), Quaternion.identity, transform);
-    }
 
+        lastPiece = nm.gameObject;
+    }
+    
     private void GroundSpeedUp()
     {
         speed += addSpeed;
+        speed = (float) System.Math.Truncate(speed * 10) / 10;
 
         if (speed > maxSpeed)
             speed = maxSpeed;
