@@ -58,6 +58,12 @@ public class GameManager : MonoBehaviour
         state = GameState.PAUSE;
     }
 
+    public void GameRestart()
+    {
+        GenericPoolManager.FlushPool();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+    }
+
     public void NewRecord(int record)
     {
         highScore = record;
