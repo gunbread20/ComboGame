@@ -824,7 +824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &338881090
 Transform:
   m_ObjectHideFlags: 0
@@ -1111,6 +1111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feverTime: 5
   coolTime: 15
+  trail: {fileID: 338881092}
   feverBar: {fileID: 1640476476}
   feverText: {fileID: 1449124514}
 --- !u!1 &470634147

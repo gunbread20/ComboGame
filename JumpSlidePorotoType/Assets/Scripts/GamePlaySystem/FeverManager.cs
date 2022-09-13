@@ -15,6 +15,7 @@ public class FeverManager : MonoBehaviour
 
     PlayerControl playerControl;
 
+    [SerializeField] PlayerTrail trail;
     [SerializeField] Slider feverBar;
     [SerializeField] Text feverText;
 
@@ -33,12 +34,14 @@ public class FeverManager : MonoBehaviour
         if (comboManager.currentCombo >= 10 && feverTime > 0 && coolTime <= 0)
         {
             OnFever();
+            trail.SetTrail(1f);
         }
         else if (feverBar.value <= 0)
         {
             OffFever();
             Debug.Log("off Fever");
             ChargeFever();
+            trail.RemoveTrail(1f);
         }
         else if (coolTime <= 0)
         {

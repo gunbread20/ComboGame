@@ -17,11 +17,10 @@ public class PlayerTrail : MonoBehaviour
         lr.positionCount = maxPoint;
         TrailPoint curTrailPoint = null;
         TrailPoint lastTrailPoint = null;
-        for (int i = maxPoint - 1; i >= 0; i--)
-        {
-            float depth = Mathf.Lerp(transform.position.z, player.position.z, (float)i / maxPoint);
 
-            curTrailPoint = new TrailPoint(transform.position, depth, lastTrailPoint);
+        for (int i = 0; i < maxPoint; i++)
+        {
+            curTrailPoint = new TrailPoint(transform.position, 0, lastTrailPoint);
             lastTrailPoint = curTrailPoint;
 
             playerTrace.Add(curTrailPoint);
@@ -37,6 +36,64 @@ public class PlayerTrail : MonoBehaviour
         {
             lr.SetPosition(i, playerTrace[i].Pos);
         }
+    }
+
+    private void InitTrail()
+    {
+        for (int i = 0; i < playerTrace.Count; i++)
+        {
+            playerTrace[i]._depth = 0;
+            playerTrace[i]._pos = player.position;
+        }
+    }
+
+    public void SetTrail(float blendTime)
+    {
+        gameObject.SetActive(true);
+        InitTrail();
+        StartCoroutine(StartTrail(blendTime));
+    }
+
+    public void RemoveTrail(float blendTime)
+    {
+        StartCoroutine(StopTrail(blendTime));
+    }
+
+    private IEnumerator StartTrail(float blendTime)
+    {
+        WaitForSeconds wait = new WaitForSeconds(blendTime / maxPoint);
+
+        for (int i = 0; i < maxPoint; i++)
+        {
+            float depth = Mathf.Lerp(player.position.z, transform.position.z, (float)i / maxPoint);
+
+            playerTrace[i]._depth = depth;
+            for (int y = i; y < playerTrace.Count; y++)
+            {
+                playerTrace[y]._depth = depth;
+            }
+
+            yield return wait;
+        }
+    }
+
+    private IEnumerator StopTrail(float blendTime)
+    {
+        WaitForSeconds wait = new WaitForSeconds(blendTime / maxPoint);
+
+        for (int i = maxPoint - 1; i >= 0; i--)
+        {
+            float depth = Mathf.Lerp(player.position.z, transform.position.z, (float)i / maxPoint);
+
+            playerTrace[i]._depth = depth;
+            for (int y = playerTrace.Count - 1; y >= i; y--)
+            {
+                playerTrace[y]._depth = depth;
+            }
+
+            yield return wait;
+        }
+        gameObject.SetActive(false);
     }
 }
 
