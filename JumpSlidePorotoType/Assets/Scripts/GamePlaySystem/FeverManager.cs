@@ -37,11 +37,11 @@ public class FeverManager : MonoBehaviour
         else if (feverBar.value <= 0)
         {
             OffFever();
-
+            Debug.Log("off Fever");
+            ChargeFever();
         }
         else if (coolTime <= 0)
         {
-            ChargeFever();
         }
     }
 
@@ -63,6 +63,7 @@ public class FeverManager : MonoBehaviour
     public void ChargeFever()
     {
         feverBar.value = comboManager.currentCombo / 10f;
+        Debug.Log(comboManager.currentCombo);
     }
 
     public void OffFever()
@@ -97,9 +98,9 @@ public class FeverManager : MonoBehaviour
 
     void FeverTextAnim()
     {
+        Fever(true);
         feverText.rectTransform.DOAnchorPos(new Vector2(0f, 0f), 1f).SetUpdate(true).SetEase(Ease.OutSine).OnComplete(() =>
         {
-            Fever(true);
             feverText.rectTransform.DOAnchorPos(new Vector2(-1000f, 0f), 1f).SetUpdate(true).OnComplete(() =>
             {
                 feverText.rectTransform.anchoredPosition = new Vector3(1000f, 0f);

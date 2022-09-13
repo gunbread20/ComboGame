@@ -38,7 +38,7 @@ public class SkinStorePanel : MonoBehaviour
 
     void ShowSideSkinImage()
     {
-        if (skins[index - 1] == null)
+        if (index - 1 < 0)
         {
             nextSkinImage = skins[index + 1];
             return;
