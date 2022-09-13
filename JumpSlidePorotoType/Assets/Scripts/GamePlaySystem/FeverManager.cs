@@ -39,16 +39,14 @@ public class FeverManager : MonoBehaviour
         else if (feverBar.value <= 0)
         {
             OffFever();
-            ChargeFever();
             trail.RemoveTrail(1f);
         }
-        else if (coolTime <= 0)
-        {
-
-        }
-
+     
         if (coolTime <= 0 && !playerControl.isFever)
+        {
+            Debug.Log("asd");
             ChargeFever();
+        }
     }
 
     public void OnFever()
