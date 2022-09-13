@@ -31,7 +31,6 @@ public class FeverManager : MonoBehaviour
     {
         if (GameManager.instance.state == GameState.RUNNING)
             feverBar.gameObject.SetActive(true);
-
         if (comboManager.feverComboCnt >= 10 && feverTime > 0 && coolTime <= 0)
         {
             OnFever();
@@ -40,7 +39,6 @@ public class FeverManager : MonoBehaviour
         else if (feverBar.value <= 0)
         {
             OffFever();
-            Debug.Log("off Fever");
             ChargeFever();
             trail.RemoveTrail(1f);
         }
@@ -49,7 +47,7 @@ public class FeverManager : MonoBehaviour
 
         }
 
-        if(coolTime <= 0 && !playerControl.isFever)
+        if (coolTime <= 0 && !playerControl.isFever)
             ChargeFever();
     }
 
