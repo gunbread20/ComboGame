@@ -26,7 +26,8 @@ public class AdManager : MonoBehaviour
         //이 ID들은 Google이 지원하는 테스트 ID이므로 제한 없이 사용 가능
 
 #if UNITY_EDITOR
-        restartAdID = "ca-app-pub-3940256099942544/1033173712";
+        //restartAdID = "ca-app-pub-3940256099942544/1033173712";
+        restartAdID =  "ca-app-pub-3940256099942544/5354046379";
         doubleReWardAdID = "ca-app-pub-3940256099942544/1033173712";
 #endif
 
