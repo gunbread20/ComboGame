@@ -56,6 +56,9 @@ public class PlayerTrail : MonoBehaviour
 
     public void RemoveTrail(float blendTime)
     {
+        if (!gameObject.activeSelf)
+            return;
+
         StartCoroutine(StopTrail(blendTime));
     }
 
