@@ -9,11 +9,13 @@ public class ComboManager : MonoBehaviour
     [SerializeField] Text comboText;
 
     public int currentCombo = 0;
+    public int feverComboCnt = 0;
     public int giveComboCnt = 1;
 
     public void IncreaseCombo()
     {
         currentCombo += giveComboCnt;
+        feverComboCnt += giveComboCnt;
         if (currentCombo >= 3)
             ShowComboText();
         
@@ -24,6 +26,7 @@ public class ComboManager : MonoBehaviour
     {
         HideComboText();
         currentCombo = 0;
+        feverComboCnt = 0;
         UpdateComboText();
     }
 
