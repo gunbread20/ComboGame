@@ -27,6 +27,9 @@ public class FeverManager : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.instance.state == GameState.RUNNING)
+            feverBar.gameObject.SetActive(true);
+
         if (comboManager.currentCombo >= 10 && feverTime > 0 && coolTime <= 0)
         {
             OnFever();
@@ -49,9 +52,6 @@ public class FeverManager : MonoBehaviour
             StartCoroutine(Fever());
             FeverTextAnim();
         }
-
-
-        feverBar.gameObject.SetActive(true);
 
         feverTime -= Time.deltaTime;
 
