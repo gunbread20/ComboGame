@@ -9,7 +9,6 @@ public class FeverManager : MonoBehaviour
     ComboManager comboManager;
 
     public float feverTime = 5f;
-    public float coolTime = 15f;
 
     bool isInit = true;
     bool isCanFever = true;
@@ -24,14 +23,13 @@ public class FeverManager : MonoBehaviour
     {
         playerControl = FindObjectOfType<PlayerControl>();
         comboManager = FindObjectOfType<ComboManager>();
-        coolTime = 0f;
     }
 
     private void Update()
     {
         if (GameManager.instance.state == GameState.RUNNING)
             feverBar.gameObject.SetActive(true);
-        if (comboManager.feverComboCnt >= 10 && feverTime > 0 && coolTime <= 0)
+        if (comboManager.feverComboCnt >= 10 && feverTime > 0 )
         {
             OnFever();
             trail.SetTrail(1f);
@@ -42,7 +40,7 @@ public class FeverManager : MonoBehaviour
             trail.RemoveTrail(1f);
         }
      
-        if (coolTime <= 0 && !playerControl.isFever)
+        if ( !playerControl.isFever)
         {
             ChargeFever();
         }
@@ -73,14 +71,12 @@ public class FeverManager : MonoBehaviour
         if (!isInit)
         {
             feverTime = 5f;
-            coolTime = 15f;
             playerControl.isInvincible = true;
             Invoke("InvincibleOff", playerControl.invincibleTime);
             comboManager.feverComboCnt = 0;
         }
         Fever(false);
 
-        coolTime -= Time.deltaTime;
         isInit = true;
     }
 
