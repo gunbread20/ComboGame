@@ -9,16 +9,15 @@ public class SkinStorePanel : MonoBehaviour
     [SerializeField] Button rightButton;
     [SerializeField] Button leftButton;
 
-    [SerializeField] Image skinImage;
-    [SerializeField] Image nextSkinImage;
-    [SerializeField] Image beforeSkinImage;
-
-    [SerializeField] Image leftSubImage;
-    [SerializeField] Image rightSubImage;
-
     [SerializeField] Transform imagesParent;
 
     public List<Image> skins = new List<Image>();
+    public List<GameObject> skinObj = new List<GameObject>();
+
+    public Button conFirmButton;
+
+    [SerializeField] Transform playerTrm;
+    [SerializeField] GameObject normalSkin;
 
     int index = 0;
 
@@ -40,6 +39,12 @@ public class SkinStorePanel : MonoBehaviour
         leftButton.onClick.AddListener(() =>
         {
             LeftChangeButton();
+        });
+
+        conFirmButton.onClick.AddListener(() =>
+        {
+            normalSkin.SetActive(false);
+            Instantiate(skinObj[index], playerTrm);
         });
     }
 
@@ -126,21 +131,5 @@ public class SkinStorePanel : MonoBehaviour
 
     }
 
-    void ShowSideSkinImage()
-    {
-        if (index - 1 < 0)
-        {
-            nextSkinImage = skins[index + 1];
-            return;
-        }
-        if (skins[index + 1] == null)
-        {
-            beforeSkinImage = skins[index - 1];
-            return;
-        }
-
-
-        nextSkinImage = skins[index + 1];
-        beforeSkinImage = skins[index - 1];
-    }
+    
 }
