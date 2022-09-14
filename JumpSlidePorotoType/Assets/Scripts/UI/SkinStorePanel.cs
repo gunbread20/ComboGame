@@ -43,8 +43,9 @@ public class SkinStorePanel : MonoBehaviour
 
         conFirmButton.onClick.AddListener(() =>
         {
-            normalSkin.SetActive(false);
-            Instantiate(skinObj[index], playerTrm);
+            Destroy(normalSkin);
+            GameObject skin =  Instantiate(skinObj[index], playerTrm);
+            normalSkin = skin;
         });
     }
 
