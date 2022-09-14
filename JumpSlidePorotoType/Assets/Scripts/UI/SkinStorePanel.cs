@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class SkinStorePanel : MonoBehaviour
 {
+    const string SkinKey = "Skin";
+
     [SerializeField] Button rightButton;
     [SerializeField] Button leftButton;
 
@@ -21,9 +23,12 @@ public class SkinStorePanel : MonoBehaviour
 
     int index = 0;
 
+    [SerializeField] Button buyButton;
+
     private void Start()
     {
         //ShowSideSkinImage();
+
 
         for (int i = 0; i < imagesParent.childCount; i++)
         {
@@ -43,10 +48,50 @@ public class SkinStorePanel : MonoBehaviour
 
         conFirmButton.onClick.AddListener(() =>
         {
-            Destroy(normalSkin);
-            GameObject skin =  Instantiate(skinObj[index], playerTrm);
-            normalSkin = skin;
+            ConfirmButton();    
         });
+
+    }
+
+
+    void ConfirmButton()
+    {
+
+        if(GameManager.instance.CheckPlayerPrefs($"Skin{index}"))
+        {
+            Destroy(normalSkin);
+            GameObject skin = Instantiate(skinObj[index], playerTrm);
+            normalSkin = skin;
+        }
+        else
+        {
+            if(GameManager.instance.gemCount >= 2000)
+            {
+                GameManager.instance.SetPlayerPrefs(SkinKey + index, 1);
+
+                CheckHasCurSkin();
+
+                GameManager.instance.gemCount -= 2000;
+            }
+        }
+
+
+        CheckHasCurSkin();
+    }
+
+    public void CheckHasCurSkin()
+    {
+        if(GameManager.instance.CheckPlayerPrefs($"Skin{index}"))
+        {
+            if(normalSkin == skinObj[index])
+                buyButton.GetComponentInChildren<Text>().text = "Equipped";
+            else
+                buyButton.GetComponentInChildren<Text>().text = "Equip";
+        }
+        else
+        {
+            buyButton.GetComponentInChildren<Text>().text = "Buy ( 2000 )";
+        }
     }
 
     public void LeftChangeButton()
@@ -71,8 +116,7 @@ public class SkinStorePanel : MonoBehaviour
 
     void ChangeImage(int index)
     {
-        
-        Debug.Log(index);
+        CheckHasCurSkin();
     }
 
 
