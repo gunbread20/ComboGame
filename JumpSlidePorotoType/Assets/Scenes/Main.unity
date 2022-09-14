@@ -1380,7 +1380,7 @@ MonoBehaviour:
   jumpHeight: 2.43
   slideSize: 1
   sideLength: 1.5
-  speed: 10
+  speed: 20
   invincibleTime: 1.5
   isFever: 0
 --- !u!54 &470634150
