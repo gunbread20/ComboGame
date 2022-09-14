@@ -164,7 +164,7 @@ public class PlayerControl : MonoBehaviour
 #if UNITY_EDITOR
             sensivity = 0.05f;
 #else
-            sensivity = 0.1f;
+            sensivity = 0.07f;
 #endif
             if (Mathf.Abs(playerX - transform.position.x) > sensivity)
             {
@@ -177,6 +177,10 @@ public class PlayerControl : MonoBehaviour
                     transform.position = new Vector3(sideLength * way, transform.position.y, transform.position.z);
                 }
 
+            }
+            else
+            {
+                transform.position = new Vector3(playerX, transform.position.y, transform.position.z);
             }
         }
 

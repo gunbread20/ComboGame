@@ -877,8 +877,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500f5a79f384774e82b51dde44e9e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartAdID: ca-app-pub-3688587815421766/5738202097
-  doubleReWardAdID: ca-app-pub-3688587815421766/5738202097
 --- !u!1 &265680667
 GameObject:
   m_ObjectHideFlags: 0

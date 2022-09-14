@@ -31,7 +31,7 @@ public class AdManager : MonoBehaviour
         doubleReWardAdID = "ca-app-pub-3940256099942544/1033173712";
 #else
         restartAdID = "ca-app-pub-3688587815421766/1060590486";
-        doubleReWardAdID = "ca-app-pub-3688587815421766/5738202097"
+        doubleReWardAdID = "ca-app-pub-3688587815421766/5738202097";
 #endif
 
 
