@@ -877,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500f5a79f384774e82b51dde44e9e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartAdID: ca-app-pub-3688587815421766/1060590486
+  restartAdID: ca-app-pub-3688587815421766/5738202097
   doubleReWardAdID: ca-app-pub-3688587815421766/5738202097
 --- !u!1 &265680667
 GameObject:
@@ -1337,7 +1337,6 @@ GameObject:
   - component: {fileID: 470634148}
   - component: {fileID: 470634150}
   - component: {fileID: 470634149}
-  - component: {fileID: 470634154}
   - component: {fileID: 470634155}
   m_Layer: 6
   m_Name: Player
@@ -1399,21 +1398,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!114 &470634154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 470634147}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63126439c2f1dd8499f48b4b7cf7ae40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swipeSensitivity: 50
-  playerCon: {fileID: 0}
-  touchStatus: 0
 --- !u!114 &470634155
 MonoBehaviour:
   m_ObjectHideFlags: 0
