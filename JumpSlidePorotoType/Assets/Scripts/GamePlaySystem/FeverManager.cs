@@ -9,6 +9,9 @@ public class FeverManager : MonoBehaviour
     ComboManager comboManager;
 
     public float feverTime = 5f;
+    private float feverMinTime = 5f;
+    private float feverCurTime = 5f;
+    private float feverMaxTime = 15f;
 
     bool isInit = true;
     bool isCanFever = true;
@@ -21,15 +24,22 @@ public class FeverManager : MonoBehaviour
 
     private void Start()
     {
+        feverMinTime = feverTime;
+        feverCurTime = feverTime;
+        feverMaxTime = feverMinTime * GroundManager.Instance.maxTimeSpeed;
+
+        GroundManager.Instance.speedUp.AddListener(AddFeverTime);
+        GroundManager.Instance.speedClear.AddListener(ClearFeverTime);
         playerControl = FindObjectOfType<PlayerControl>();
         comboManager = FindObjectOfType<ComboManager>();
     }
 
     private void Update()
     {
+        
         if (GameManager.instance.state == GameState.RUNNING)
             feverBar.gameObject.SetActive(true);
-        if (comboManager.feverComboCnt >= 10 && feverTime > 0 )
+        if (comboManager.feverComboCnt >= 10 * Time.timeScale && feverTime > 0 )
         {
             OnFever();
             trail.SetTrail(1f);
@@ -56,21 +66,21 @@ public class FeverManager : MonoBehaviour
 
         feverTime -= Time.deltaTime;
 
-        feverBar.value = feverTime / 5f;
+        feverBar.value = feverTime / feverCurTime;
 
         isInit = false;
     }
 
     public void ChargeFever()
     {
-        feverBar.value = comboManager.feverComboCnt / 10f;
+        feverBar.value = comboManager.feverComboCnt / (10f * Time.timeScale);
     }
 
     public void OffFever()
     {
         if (!isInit)
         {
-            feverTime = 5f;
+            feverTime = feverCurTime;
             playerControl.isInvincible = true;
             Invoke("InvincibleOff", playerControl.invincibleTime);
             comboManager.feverComboCnt = 0;
@@ -87,11 +97,12 @@ public class FeverManager : MonoBehaviour
 
     IEnumerator Fever()
     {
-        Time.timeScale = 0.2f;
+        float temp = Time.timeScale;
+        Time.timeScale *= 0.2f;
 
         yield return new WaitForSecondsRealtime(1f);
 
-        Time.timeScale = 1;
+        Time.timeScale = temp;
     }
 
     void FeverTextAnim()
@@ -110,5 +121,20 @@ public class FeverManager : MonoBehaviour
     void Fever(bool isFever)
     {
         playerControl.isFever = isFever;
+    }
+
+    void AddFeverTime()
+    {
+        feverCurTime = feverMinTime * (Time.timeScale + GroundManager.Instance.addTimeSpeed);
+
+        if (feverCurTime > feverMaxTime)
+        {
+            feverCurTime = feverMaxTime;
+        }
+    }
+
+    void ClearFeverTime()
+    {
+        feverCurTime = feverMinTime;
     }
 }

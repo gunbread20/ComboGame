@@ -12,9 +12,10 @@ public class GroundManager : MonoBehaviour
     public UnityEvent speedClear;
 
     public float speed = 8;
-    public float minSpeed = 8;
-    public float maxSpeed = 16;
-    public float addSpeed = 0.1f;
+    public float timeSpeed = 1;
+    public float minTimeSpeed = 1;
+    public float maxTimeSpeed = 3;
+    public float addTimeSpeed = 0.1f;
     public float feverSlowTime = 1;
 
     private GameObject lastPiece;
@@ -61,6 +62,8 @@ public class GroundManager : MonoBehaviour
 
     void Start()
     {
+        timeSpeed = 1;
+        Time.timeScale = timeSpeed;
         speedUp.AddListener(GroundSpeedUp);
         speedClear.AddListener(GroundSpeedClear);
     }
@@ -79,15 +82,16 @@ public class GroundManager : MonoBehaviour
     
     private void GroundSpeedUp()
     {
-        speed += addSpeed;
-        speed = (float) System.Math.Truncate(speed * 10) / 10;
+        timeSpeed += addTimeSpeed;
+        if (timeSpeed > maxTimeSpeed)
+            timeSpeed = maxTimeSpeed;
 
-        if (speed > maxSpeed)
-            speed = maxSpeed;
+        Time.timeScale = timeSpeed;
     }
 
     private void GroundSpeedClear()
     {
-        speed = minSpeed;
+        timeSpeed = minTimeSpeed;
+        Time.timeScale = timeSpeed;
     }
 }

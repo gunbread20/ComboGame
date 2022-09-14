@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
 
         panel.SetActive(false);
         state = GameState.PAUSE;
+
+        //Time.timeScale *= 3;
     }
 
     private void OnApplicationQuit()

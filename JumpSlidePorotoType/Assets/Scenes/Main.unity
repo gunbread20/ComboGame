@@ -1377,10 +1377,7 @@ MonoBehaviour:
   isJump: 0
   isInvincible: 0
   jumpForce: 7
-  jumpHight: 2.5
-  minJumpForce: 7
-  maxJumpForce: 9
-  addJumpForce: 0.025
+  jumpHeight: 2.43
   slideSize: 1
   sideLength: 1.5
   speed: 10
@@ -4705,9 +4702,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   speed: 8
-  minSpeed: 8
-  maxSpeed: 16
-  addSpeed: 0.1
+  timeSpeed: 1
+  minTimeSpeed: 1
+  maxTimeSpeed: 3
+  addTimeSpeed: 0.1
   feverSlowTime: 1
   groundSize: 10
   groundCount: 5

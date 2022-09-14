@@ -17,15 +17,15 @@ public class PlayerControl : MonoBehaviour
     Vector3 oriPos;
 
     public float jumpForce = 7;
-    public float jumpHight = 2.4f;
-    public float minJumpForce = 7;
-    public float maxJumpForce = 9;
-    public float addJumpForce = 0.025f;
+    public float jumpHeight = 2.5f;
 
     public float slideSize;
     public float sideLength;
     public float speed;
+
     public float invincibleTime;
+    private float invincibleMinTime;
+    private float invincibleMaxTime;
 
     public bool isFever = false;
 
@@ -34,8 +34,11 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        GroundManager.Instance.speedUp.AddListener(PlayerJumpUp);
-        GroundManager.Instance.speedClear.AddListener(PlayerJumpClear);
+        invincibleMinTime = invincibleTime;
+        invincibleMaxTime = invincibleTime * GroundManager.Instance.maxTimeSpeed;
+
+        GroundManager.Instance.speedUp.AddListener(AddInvincibleTime);
+        GroundManager.Instance.speedClear.AddListener(ClearInvincibleTime);
 
         rg = GetComponentInChildren<Rigidbody>();
         scoreManager = FindObjectOfType<ScoreManager>();
@@ -111,7 +114,7 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (transform.position.y > jumpHight)
+        if (transform.position.y > jumpHeight)
         {
             rg.velocity = Vector3.zero;
             rg.velocity = (Vector3.down * (jumpForce / 2));
@@ -181,15 +184,18 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void PlayerJumpUp()
+    void AddInvincibleTime()
     {
-        jumpForce += addJumpForce;
-        if (jumpForce > maxJumpForce)
-            jumpForce = maxJumpForce;
+        invincibleTime = invincibleTime * (Time.timeScale + GroundManager.Instance.addTimeSpeed);
+
+        if (invincibleTime > invincibleMaxTime)
+        {
+            invincibleTime = invincibleMaxTime;
+        }
     }
 
-    private void PlayerJumpClear()
+    void ClearInvincibleTime()
     {
-        jumpForce = minJumpForce;
+        invincibleTime = invincibleMinTime;
     }
 }
