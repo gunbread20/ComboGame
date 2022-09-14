@@ -22,8 +22,7 @@ public class GroundManager : MonoBehaviour
     public float groundSize;
     public int groundCount = 3;
 
-    [Range(0.01f, 1f)]
-    public float gemChance;
+    public bool gemChance;
 
     private GenericPool<GroundMove>[] groundPools = null;
 
@@ -41,8 +40,7 @@ public class GroundManager : MonoBehaviour
             groundPools[i] = GenericPoolManager.CratePool<GroundMove>($"Ground{i}", grounds[i], transform, 3);
         }
 
-        float temp = gemChance;
-        gemChance = 0;
+        gemChance = false;
 
         for (int i = 0; i < groundCount; i++)
         {
@@ -52,10 +50,13 @@ public class GroundManager : MonoBehaviour
                 lastPiece = nm.gameObject;
             }
             else
-                groundPools[0].GetPoolObject(new Vector3(0, 0, groundSize * i), true);
+            {
+                GroundMove nm = groundPools[0].GetPoolObject(new Vector3(0, 0, groundSize * i), true);
+            }
+                
         }
 
-        gemChance = temp;
+        gemChance = true;
     }
 
     void Start()
@@ -70,6 +71,7 @@ public class GroundManager : MonoBehaviour
 
         Vector3 lastPos = lastPiece.transform.position;
         GroundMove nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
+        nm.gemActive = true;
         //Instantiate(grounds[r], new Vector3(0, 0, groundSize * (groundCount - 1)), Quaternion.identity, transform);
 
         lastPiece = nm.gameObject;

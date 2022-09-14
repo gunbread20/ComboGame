@@ -9,10 +9,11 @@ public class GroundMove : MonoBehaviour
 
     public int groundNum;
     public float moveSpeed;
+    public bool gemActive;
     private bool jumped;
 
     [SerializeField]
-    private GameObject gem;
+    private GameObject[] gem;
 
     ScoreManager scoreManager;
     PlayerControl playerControl;
@@ -27,18 +28,18 @@ public class GroundMove : MonoBehaviour
     {
         time = 0;
         feverSpeed = 1;
-        slowTime = GroundManager.Instance.feverSlowTime;
     }
 
     private void OnEnable()
-    {
-        gem.SetActive(false);
+    {   
         jumped = false;
+        gemActive = GroundManager.Instance.gemChance;
         GemSpawn();
     }
 
     void Start()
     {
+        slowTime = GroundManager.Instance.feverSlowTime;
         moveSpeed = GroundManager.Instance.speed;
         scoreManager = FindObjectOfType<ScoreManager>();
         playerControl = FindObjectOfType<PlayerControl>();
@@ -97,14 +98,29 @@ public class GroundMove : MonoBehaviour
             return;
         }
 
-        float rNum;
-        int rPos;
-
-        rNum = Random.Range(0f, 100f);
-
-        if (rNum <= GroundManager.Instance.gemChance * 100)
+        if (gemActive == false)
         {
-            gem.SetActive(true);
+            for (int i = 0; i < gem.Length; i++)
+            {
+                gem[i].SetActive(false);
+            }
         }
+        else
+        {
+            for (int i = 0; i < gem.Length; i++)
+            {
+                gem[i].SetActive(true);
+            }
+        }
+
+        //float rNum;
+        //int rPos;
+
+        //rNum = Random.Range(0f, 100f);
+
+        //if (rNum <= GroundManager.Instance.gemChance * 100)
+        //{
+            
+        //}
     }
 }
