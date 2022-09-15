@@ -29,7 +29,6 @@ public class SkinStorePanel : MonoBehaviour
     {
         //ShowSideSkinImage();
 
-
         for (int i = 0; i < imagesParent.childCount; i++)
         {
             skins.Add(imagesParent.GetChild(i).GetComponent<Image>());
