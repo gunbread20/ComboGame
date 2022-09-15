@@ -23,21 +23,27 @@ public class SkinIconCam : MonoBehaviour
 
     void CreateRenderCam()
     {
+        GameObject[] Skins = Resources.LoadAll<GameObject>("Skins/Player");
 
-        GameObject obj = Instantiate(skinIconCam, camParent);
+        for (int i = 0; i < iconParent.childCount; i++)
+        {
+            GameObject obj = Instantiate(skinIconCam, camParent);
 
-        RenderTexture renderTexture = new RenderTexture(256, 256, 24, RenderTextureFormat.Default);
+            RenderTexture renderTexture = new RenderTexture(256, 256, 24, RenderTextureFormat.Default);
 
-        obj.GetComponent<Camera>().targetTexture = renderTexture;
+            obj.GetComponent<Camera>().targetTexture = renderTexture;
 
-        SetSkinImage(obj);
+            //Skins[i] 
+
+            SetSkinImage(obj);
+        }
     }
 
     void SetSkinImage(GameObject camObj)
     {
         for (int i = 0; i < iconParent.childCount; i++)
         {
-            iconParent.GetChild(i).GetComponent<RawImage>().texture = camObj.GetComponent<Camera>().targetTexture;
+            iconParent.GetChild(i).GetComponent<RawImage>().texture = camParent.GetChild(i).GetComponent<Camera>().targetTexture;
         }
     }
 }
