@@ -13,7 +13,7 @@ public class SkinStorePanel : MonoBehaviour
 
     [SerializeField] Transform imagesParent;
 
-    public List<Image> skins = new List<Image>();
+    public List<RawImage> skins = new List<RawImage>();
     public List<GameObject> skinObj = new List<GameObject>();
 
     public Button conFirmButton;
@@ -29,9 +29,12 @@ public class SkinStorePanel : MonoBehaviour
     {
         //ShowSideSkinImage();
 
+
+        GameManager.instance.SetPlayerPrefs(SkinKey + 0, 1);
+
         for (int i = 0; i < imagesParent.childCount; i++)
         {
-            skins.Add(imagesParent.GetChild(i).GetComponent<Image>());
+            skins.Add(imagesParent.GetChild(i).GetComponent<RawImage>());
         }
         skins.Reverse();
 
@@ -49,7 +52,6 @@ public class SkinStorePanel : MonoBehaviour
         {
             ConfirmButton();    
         });
-
     }
 
 
