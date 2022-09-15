@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AnimationScript : MonoBehaviour {
+public class GemAnimationScript : MonoBehaviour {
 
     public bool isAnimated = false;
 
@@ -25,24 +25,41 @@ public class AnimationScript : MonoBehaviour {
     public float scaleRate;
     private float scaleTimer;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    private MeshRenderer mr = null;
 
-       
-        
-        if(isAnimated)
+    private Vector3 originLocalPos = Vector3.zero;
+
+    private void Awake()
+    {
+        originLocalPos = transform.localPosition;
+        mr = GetComponent<MeshRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        transform.localPosition = originLocalPos;
+        mr.material.color = new Color(mr.material.color.r, mr.material.color.g, mr.material.color.b, 1);
+        isAnimated = true;
+    }
+
+    public void SetOff()
+    {
+        isAnimated = false;
+        StartCoroutine(OffEffect());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (isAnimated)
         {
-            if(isRotating)
+            if (isRotating)
             {
                 transform.Rotate(rotationAngle * rotationSpeed * Time.deltaTime);
             }
 
-            if(isFloating)
+            if (isFloating)
             {
                 floatTimer += Time.deltaTime;
                 Vector3 moveDir = new Vector3(0.0f, 0.0f, floatSpeed);
@@ -55,7 +72,7 @@ public class AnimationScript : MonoBehaviour {
                     floatSpeed = -floatSpeed;
                 }
 
-                else if(!goingUp && floatTimer >= floatRate)
+                else if (!goingUp && floatTimer >= floatRate)
                 {
                     goingUp = true;
                     floatTimer = 0;
@@ -63,7 +80,7 @@ public class AnimationScript : MonoBehaviour {
                 }
             }
 
-            if(isScaling)
+            if (isScaling)
             {
                 scaleTimer += Time.deltaTime;
 
@@ -76,7 +93,7 @@ public class AnimationScript : MonoBehaviour {
                     transform.localScale = Vector3.Lerp(transform.localScale, startScale, scaleSpeed * Time.deltaTime);
                 }
 
-                if(scaleTimer >= scaleRate)
+                if (scaleTimer >= scaleRate)
                 {
                     if (scalingUp) { scalingUp = false; }
                     else if (!scalingUp) { scalingUp = true; }
@@ -84,5 +101,27 @@ public class AnimationScript : MonoBehaviour {
                 }
             }
         }
-	}
+    }
+
+    IEnumerator OffEffect()
+    {
+        float timer = 0f;
+        Color startCol = mr.material.color;
+        Vector3 pos = Vector3.zero;
+        while (timer <= 1f)
+        {
+            pos = transform.localPosition;
+            pos.y += 10 * Time.deltaTime;
+            transform.localPosition = pos;
+
+            startCol.a = 1 - timer;
+            mr.material.color = startCol;
+            transform.Rotate(rotationAngle * 30 * Time.deltaTime);
+
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+        gameObject.SetActive(false);
+    }
 }

@@ -75,7 +75,8 @@ public class PlayerControl : MonoBehaviour
 
         if (other.CompareTag("Gem"))
         {
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
+            other.GetComponent<GemAnimationScript>().SetOff(); ;
             GameManager.instance.GetGem();
         }
     }
