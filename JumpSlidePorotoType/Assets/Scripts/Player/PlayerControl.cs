@@ -161,11 +161,7 @@ public class PlayerControl : MonoBehaviour
             float way = Mathf.Sign(playerX - transform.position.x);
             float xSpeed = way * speed * Time.deltaTime;
             float sensivity = 0.1f;
-#if UNITY_EDITOR
-            sensivity = 0.05f;
-#else
-            sensivity = 0.07f;
-#endif
+
             if (Mathf.Abs(playerX - transform.position.x) > sensivity)
             {
                 if (Mathf.Abs(transform.position.x + xSpeed) <= sideLength)
