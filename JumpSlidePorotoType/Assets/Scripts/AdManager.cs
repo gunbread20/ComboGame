@@ -39,12 +39,19 @@ public class AdManager : MonoBehaviour
         this.restartAd = new InterstitialAd(restartAdID);
         AdRequest request = new AdRequest.Builder().Build();
         this.restartAd.OnAdClosed += RestartAd_OnAdClosed;
+        this.restartAd.OnAdFailedToLoad += RestartAd_OnAdFailedToLoad;
         this.restartAd.LoadAd(request);
 
         this.doubleRewardAd = new InterstitialAd(doubleReWardAdID);
         AdRequest request2 = new AdRequest.Builder().Build();
         this.doubleRewardAd.OnAdClosed += DoubleRewardAd_OnAdClosed;
         this.doubleRewardAd.LoadAd(request);
+    }
+
+    private void RestartAd_OnAdFailedToLoad(object sender, AdFailedToLoadEventArgs e)
+    {
+        Debug.Log("Restart");
+        GameManager.instance.GameRestart();
     }
 
     private void RestartAd_OnAdClosed(object sender, System.EventArgs e)
