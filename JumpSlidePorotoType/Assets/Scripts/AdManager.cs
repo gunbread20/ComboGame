@@ -25,7 +25,7 @@ public class AdManager : MonoBehaviour
         //여기 들어가는 ID는 /가 들어간 쪽의 광고 단위 ID
         //이 ID들은 Google이 지원하는 테스트 ID이므로 제한 없이 사용 가능
 
-        restartAdID = "ca-app-pub-3688587815421766/1060590486";
+        restartAdID = "ca-app-pub-3940256099942544/5354046379";
         doubleReWardAdID = "ca-app-pub-3688587815421766/5738202097";
 
         //단일 OS일 경우 여기서 바로 스트링으로 꽂아줘도 가능
