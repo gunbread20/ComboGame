@@ -1350,6 +1350,7 @@ MonoBehaviour:
   invincibleTime: 1.5
   curPlayerObj: {fileID: 220151257}
   isFever: 0
+  touchState: 0
 --- !u!54 &470634150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4830,6 +4831,9 @@ MonoBehaviour:
   - {fileID: 1836188486487755885, guid: d26faf2ccc9a58940870c1f5f9546fca, type: 3}
   - {fileID: 1836188486487755885, guid: b5a14033178704b4793ad9d1a689372f, type: 3}
   - {fileID: 1836188486487755885, guid: baeb7088ea093f047bcd190b6821773f, type: 3}
+  - {fileID: 1836188486487755885, guid: 179e15e8c267b584b82c615ef51925e9, type: 3}
+  - {fileID: 1836188486487755885, guid: dd70934c262d8c845ba1b80127c9c3c4, type: 3}
+  - {fileID: 1836188486487755885, guid: 2407a0bbb435f2242a1e119f64de5662, type: 3}
   speedUp:
     m_PersistentCalls:
       m_Calls: []

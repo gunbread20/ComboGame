@@ -31,6 +31,8 @@ public class PlayerControl : MonoBehaviour
 
     public bool isFever = false;
 
+    public TouchStatus touchState;
+
     ScoreManager scoreManager;
     PlayerHealth playerHealth;
 
@@ -49,6 +51,7 @@ public class PlayerControl : MonoBehaviour
         isJump = false;
         isInvincible = false;
         startJump = false;
+        touchState = TouchStatus.NONE;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -131,8 +134,9 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            touchState = TouchStatus.DRAG;
             float ClickPosX = Input.mousePosition.x - widthHalf;
-            float widthSixer = widthHalf / 12;
+            float widthSixer = widthHalf / 6;
 
             if (Mathf.Abs(ClickPosX) <= Mathf.Abs(widthHalf - widthSixer))
             {
@@ -149,6 +153,7 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            touchState = TouchStatus.NONE;
             PlayerMovement(TouchStatus.NONE, 0);
         }
     }
