@@ -60,9 +60,7 @@ public class SkinStorePanel : MonoBehaviour
 
         if(GameManager.instance.CheckPlayerPrefs($"Skin{index}"))
         {
-            Destroy(normalSkin);
-            GameObject skin = Instantiate(skinObj[index], playerTrm);
-            normalSkin = skin;
+            normalSkin = skinObj[index];
         }
         else
         {
@@ -102,17 +100,19 @@ public class SkinStorePanel : MonoBehaviour
 
         index--;
         ChangeImage(index);
-        LeftMove(index);
+        PlayerObj();    
+        //LeftMove(index);
     }
 
     public void RightChangeButton()
     {
-        if (index >= imagesParent.childCount -2)
+        if (index >= imagesParent.childCount -1)
             return;
 
         index++;
         ChangeImage(index);
-        RightMove(index);
+        PlayerObj();
+        //RightMove(index);
     }
 
     void ChangeImage(int index)
@@ -121,6 +121,15 @@ public class SkinStorePanel : MonoBehaviour
     }
 
 
+    void PlayerObj()
+    {
+        for (int i = 0; i < skinObj.Count; i++)
+        {
+            skinObj[i].SetActive(false);
+        }
+        skinObj[index].SetActive(true);
+    }
+    /*
     void LeftMove(int index)
     {
         skins[index].transform.SetSiblingIndex(imagesParent.childCount - 1);
@@ -176,6 +185,5 @@ public class SkinStorePanel : MonoBehaviour
         }
 
     }
-
-    
+    */
 }
