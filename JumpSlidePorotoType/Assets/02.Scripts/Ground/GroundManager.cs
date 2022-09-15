@@ -141,11 +141,11 @@ public class GroundManager : MonoBehaviour
         lastPiece = nm.gameObject;
     }
 
-    public void LevelUp()
+    public void LevelSet(int v)
     {
-        if (level < 5)
+        if (v < 5 && v > -1)
         {
-            level++;
+            level = v;
         }
         else
             return;

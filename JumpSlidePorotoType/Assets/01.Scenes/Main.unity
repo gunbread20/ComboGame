@@ -4849,7 +4849,7 @@ MonoBehaviour:
   speed: 8
   timeSpeed: 1
   minTimeSpeed: 1
-  maxTimeSpeed: 3
+  maxTimeSpeed: 4
   addTimeSpeed: 0.1
   feverSlowTime: 1
   groundSize: 10

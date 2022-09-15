@@ -114,8 +114,6 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        float widthHalf = Screen.width / 2;
-
         if (GameManager.instance.state == GameState.PAUSE)
         {
             return;
@@ -132,6 +130,8 @@ public class PlayerControl : MonoBehaviour
             rg.velocity = (Vector3.down * (jumpForce / 2));
         }
 
+        /*float widthHalf = Screen.width / 2;
+
         if (Input.GetMouseButton(0))
         {
             touchState = TouchStatus.DRAG;
@@ -142,6 +142,34 @@ public class PlayerControl : MonoBehaviour
             {
                 ClickPosX = Mathf.Clamp(ClickPosX, -(widthHalf - widthSixer), (widthHalf - widthSixer));
                 float playerPosX = sideLength * (ClickPosX / (widthHalf - widthSixer));
+                PlayerMovement(TouchStatus.DRAG, playerPosX);
+            }
+            else
+            {
+                float maxPosX = sideLength * Mathf.Sign(ClickPosX);
+                PlayerMovement(TouchStatus.DRAG, maxPosX);
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            touchState = TouchStatus.NONE;
+            PlayerMovement(TouchStatus.NONE, 0);
+        }*/
+
+        float widthHalf =  0.5f;
+
+        if (Input.GetMouseButton(0))
+        {
+            touchState = TouchStatus.DRAG;
+            float ClickPosX = Camera.main.ScreenToViewportPoint(Input.mousePosition).x - widthHalf;
+            Debug.Log(ClickPosX);
+            float widthLimit = 0.425f;
+
+            if (Mathf.Abs(ClickPosX) <= Mathf.Abs(widthLimit))
+            {
+                ClickPosX = Mathf.Clamp(ClickPosX, -(widthLimit), (widthLimit));
+                float playerPosX = sideLength * (ClickPosX / widthHalf);
                 PlayerMovement(TouchStatus.DRAG, playerPosX);
             }
             else

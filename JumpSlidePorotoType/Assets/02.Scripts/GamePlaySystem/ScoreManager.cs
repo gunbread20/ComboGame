@@ -72,19 +72,19 @@ public class ScoreManager : MonoBehaviour
         }
         else if (scoreCount > level_3Max)
         {
-            GroundManager.Instance.LevelUp();
+            GroundManager.Instance.LevelSet(4);
         }
         else if (scoreCount > level_2Max)
         {
-            GroundManager.Instance.LevelUp();
+            GroundManager.Instance.LevelSet(3);
         }
         else if (scoreCount > level_1Max)
         {
-            GroundManager.Instance.LevelUp();
+            GroundManager.Instance.LevelSet(2);
         }
         else if (scoreCount > level_0Max)
         {
-            GroundManager.Instance.LevelUp();
+            GroundManager.Instance.LevelSet(1);
         }
         else
         {
