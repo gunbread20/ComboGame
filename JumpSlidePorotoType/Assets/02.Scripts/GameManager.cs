@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public int gemCount;
     public int highScore;
 
+    public float volume = 20f;
+
     private void Awake()
     {
         if (instance == null)

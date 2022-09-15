@@ -25,6 +25,7 @@ public class GemAnimationScript : MonoBehaviour {
     public float scaleRate;
     private float scaleTimer;
 
+    private AudioSource audioSource = null;
     private MeshRenderer mr = null;
 
     private Vector3 originLocalPos = Vector3.zero;
@@ -32,6 +33,7 @@ public class GemAnimationScript : MonoBehaviour {
     private void Awake()
     {
         originLocalPos = transform.localPosition;
+        audioSource = GetComponent<AudioSource>();
         mr = GetComponent<MeshRenderer>();
     }
 
@@ -44,6 +46,8 @@ public class GemAnimationScript : MonoBehaviour {
 
     public void SetOff()
     {
+        audioSource.volume = GameManager.instance.volume / 100f;
+        audioSource.Play();
         isAnimated = false;
         StartCoroutine(OffEffect());
     }
