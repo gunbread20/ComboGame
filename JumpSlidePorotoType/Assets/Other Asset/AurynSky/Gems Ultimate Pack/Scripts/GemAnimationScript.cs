@@ -110,6 +110,7 @@ public class GemAnimationScript : MonoBehaviour {
     IEnumerator OffEffect()
     {
         float timer = 0f;
+        float alphatimer = 0f;
         Color startCol = mr.material.color;
         Vector3 pos = Vector3.zero;
         while (timer <= 1f)
@@ -118,11 +119,12 @@ public class GemAnimationScript : MonoBehaviour {
             pos.y += 10 * Time.deltaTime;
             transform.localPosition = pos;
 
-            startCol.a = 1 - timer;
+            startCol.a = 1 - alphatimer;
             mr.material.color = startCol;
             transform.Rotate(rotationAngle * 30 * Time.deltaTime);
 
             timer += Time.deltaTime;
+            alphatimer += Time.deltaTime * 3;
 
             yield return null;
         }
