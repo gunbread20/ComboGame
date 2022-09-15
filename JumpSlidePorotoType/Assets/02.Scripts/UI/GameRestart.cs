@@ -18,6 +18,13 @@ public class GameRestart : MonoBehaviour
 
     public void RestartBtn()
     {
+#if UNITY_EDITOR
+
+#else
+        GameManager.instance.GameRestart();
+
+#endif
+
         int Rand = Random.Range(0, 101);
 
         if (adPersent * 100 >= Rand)

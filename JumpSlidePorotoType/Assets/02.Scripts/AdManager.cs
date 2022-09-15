@@ -5,11 +5,8 @@ using GoogleMobileAds.Api;
 
 public class AdManager : MonoBehaviour
 {
-     string restartAdID;
-    string doubleReWardAdID;
 
     private InterstitialAd restartAd;
-    private InterstitialAd doubleRewardAd;
 
     public void Start()
     {
@@ -25,19 +22,19 @@ public class AdManager : MonoBehaviour
         //여기 들어가는 ID는 /가 들어간 쪽의 광고 단위 ID
         //이 ID들은 Google이 지원하는 테스트 ID이므로 제한 없이 사용 가능
 
-        restartAdID = "ca-app-pub-3940256099942544/5354046379";
-        doubleReWardAdID = "ca-app-pub-3688587815421766/5738202097";
+#if UNITY_ANDROID
+        string restartAdID = "ca-app-pub-3940256099942544/5354046379";
+#elif UNITY_IPHONE
+        string restartAdID = "ca-app-pub-3940256099942544/5354046379";
+#else
+        string restartAdID = "ca-app-pub-3940256099942544/5354046379";
+#endif
 
         //단일 OS일 경우 여기서 바로 스트링으로 꽂아줘도 가능
         this.restartAd = new InterstitialAd(restartAdID);
         AdRequest request = new AdRequest.Builder().Build();
         this.restartAd.OnAdClosed += RestartAd_OnAdClosed;
         this.restartAd.LoadAd(request);
-
-        this.doubleRewardAd = new InterstitialAd(doubleReWardAdID);
-        AdRequest request2 = new AdRequest.Builder().Build();
-        this.doubleRewardAd.OnAdClosed += DoubleRewardAd_OnAdClosed;
-        this.doubleRewardAd.LoadAd(request);
     }
 
     private void RestartAd_OnAdFailedToLoad(object sender, AdFailedToLoadEventArgs e)
@@ -50,12 +47,6 @@ public class AdManager : MonoBehaviour
     {
         Debug.Log("Restart");
         GameManager.instance.GameRestart();
-    }
-
-    private void DoubleRewardAd_OnAdClosed(object sender, System.EventArgs e)
-    {
-       
-        throw new System.NotImplementedException();
     }
 
     //광고를 시작해야 할 때에 외부에서 이 함수를 호출
