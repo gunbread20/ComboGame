@@ -39,7 +39,6 @@ public class AdManager : MonoBehaviour
         this.restartAd = new InterstitialAd(restartAdID);
         AdRequest request = new AdRequest.Builder().Build();
         this.restartAd.OnAdClosed += RestartAd_OnAdClosed;
-        this.restartAd.OnAdFailedToLoad += RestartAd_OnAdFailedToLoad;
         this.restartAd.LoadAd(request);
 
         this.doubleRewardAd = new InterstitialAd(doubleReWardAdID);
@@ -71,6 +70,7 @@ public class AdManager : MonoBehaviour
     {
         if (this.restartAd.IsLoaded())
         {
+            this.restartAd.OnAdFailedToLoad += RestartAd_OnAdFailedToLoad;
             this.restartAd.Show();
         }
     }
