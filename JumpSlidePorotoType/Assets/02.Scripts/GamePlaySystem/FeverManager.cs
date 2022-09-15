@@ -120,7 +120,7 @@ public class FeverManager : MonoBehaviour
 
     void Fever(bool isFever)
     {
-        playerControl.isFever = isFever;
+        playerControl.SetFeverEffect(isFever);
     }
 
     void AddFeverTime()

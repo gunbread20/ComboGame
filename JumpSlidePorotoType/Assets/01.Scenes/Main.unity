@@ -1320,8 +1320,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 338881090}
-  - {fileID: 220151257}
   - {fileID: 665676539}
+  - {fileID: 220151257}
   - {fileID: 560127540}
   - {fileID: 2014791010}
   - {fileID: 1507121710}
@@ -1348,6 +1348,7 @@ MonoBehaviour:
   sideLength: 1.5
   speed: 20
   invincibleTime: 1.5
+  curPlayerObj: {fileID: 220151257}
   isFever: 0
 --- !u!54 &470634150
 Rigidbody:
@@ -1618,7 +1619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6079930699386764113, guid: f82a6ff3f11619b48b452480acf169e2, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6079930699386764113, guid: f82a6ff3f11619b48b452480acf169e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2190,8 +2191,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.19996412, y: -0.3736123, z: 0.08282785, w: 0.90198}
-  m_LocalPosition: {x: 5, y: 5, z: -5}
+  m_LocalRotation: {x: 0.20163712, y: 0.000000016857397, z: -0.0000000034703553, w: 0.97946036}
+  m_LocalPosition: {x: 0, y: 5.73, z: -6.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3974,6 +3975,7 @@ MonoBehaviour:
   startPanel: {fileID: 0}
   gemCount: 0
   highScore: 0
+  volume: 20
 --- !u!4 &1813588130
 Transform:
   m_ObjectHideFlags: 0
@@ -4005,6 +4007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d0e091b08273544843fdb482660327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerControl: {fileID: 0}
   rightButton: {fileID: 1496017360}
   leftButton: {fileID: 1229013165}
   imagesParent: {fileID: 318194630}

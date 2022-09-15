@@ -8,6 +8,7 @@ public class SkinStorePanel : MonoBehaviour
 {
     const string SkinKey = "Skin";
 
+    [SerializeField] PlayerControl playerControl = null;
     [SerializeField] Button rightButton;
     [SerializeField] Button leftButton;
 
@@ -127,6 +128,7 @@ public class SkinStorePanel : MonoBehaviour
         {
             skinObj[i].SetActive(false);
         }
+        playerControl.curPlayerObj = skinObj[index].transform;
         skinObj[index].SetActive(true);
     }
     /*

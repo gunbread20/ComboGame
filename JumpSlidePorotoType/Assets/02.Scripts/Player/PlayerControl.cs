@@ -27,6 +27,8 @@ public class PlayerControl : MonoBehaviour
     private float invincibleMinTime;
     private float invincibleMaxTime;
 
+    public Transform curPlayerObj = null;
+
     public bool isFever = false;
 
     ScoreManager scoreManager;
@@ -83,8 +85,14 @@ public class PlayerControl : MonoBehaviour
 
     public void InvincibleEffect()
     {
-        Debug.Log(GetComponentInChildren<MeshRenderer>().materials[0]);
-        GetComponentInChildren<MeshRenderer>().materials[0].DOFade(0, 0.3f).SetLoops(6, LoopType.Yoyo);
+        Debug.Log(curPlayerObj.GetComponent<MeshRenderer>().materials[0]);
+        curPlayerObj.GetComponent<MeshRenderer>().materials[0].DOFade(0, 0.3f).SetLoops(6, LoopType.Yoyo);
+    }
+
+    public void SetFeverEffect(bool isFever)
+    {
+        this.isFever = isFever;
+        curPlayerObj.GetComponent<MeshRenderer>().materials[1].DOFloat(isFever ? 1f : 0f, "Alpha", 0.3f);
     }
 
     public void InvincibleOff()
