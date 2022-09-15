@@ -1320,8 +1320,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 338881090}
-  - {fileID: 220151257}
   - {fileID: 665676539}
+  - {fileID: 220151257}
   - {fileID: 560127540}
   - {fileID: 2014791010}
   - {fileID: 1507121710}
@@ -1349,6 +1349,7 @@ MonoBehaviour:
   speed: 20
   invincibleTime: 1.5
   isFever: 0
+  touchState: 0
 --- !u!54 &470634150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3974,6 +3975,7 @@ MonoBehaviour:
   startPanel: {fileID: 0}
   gemCount: 0
   highScore: 0
+  volume: 20
 --- !u!4 &1813588130
 Transform:
   m_ObjectHideFlags: 0
@@ -4827,6 +4829,9 @@ MonoBehaviour:
   - {fileID: 1836188486487755885, guid: d26faf2ccc9a58940870c1f5f9546fca, type: 3}
   - {fileID: 1836188486487755885, guid: b5a14033178704b4793ad9d1a689372f, type: 3}
   - {fileID: 1836188486487755885, guid: baeb7088ea093f047bcd190b6821773f, type: 3}
+  - {fileID: 1836188486487755885, guid: 179e15e8c267b584b82c615ef51925e9, type: 3}
+  - {fileID: 1836188486487755885, guid: dd70934c262d8c845ba1b80127c9c3c4, type: 3}
+  - {fileID: 1836188486487755885, guid: 2407a0bbb435f2242a1e119f64de5662, type: 3}
   speedUp:
     m_PersistentCalls:
       m_Calls: []

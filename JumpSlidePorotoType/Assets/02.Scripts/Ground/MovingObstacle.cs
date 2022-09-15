@@ -17,6 +17,15 @@ public class MovingObstacle : MonoBehaviour
     {
         maxDis = halfWidth - (transform.localScale.x / 2);
         player = GameObject.Find("Player").GetComponent<PlayerControl>();
+
+        if (Random.Range(0, 2) == 0)
+        {
+            transform.localPosition = new Vector3(maxDis, transform.localPosition.y, transform.localPosition.z);
+        }
+        else
+        {
+            transform.localPosition = new Vector3(-maxDis, transform.localPosition.y, transform.localPosition.z);
+        }
     }
 
     private void Update()
