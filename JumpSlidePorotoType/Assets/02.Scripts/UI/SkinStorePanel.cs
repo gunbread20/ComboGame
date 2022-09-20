@@ -20,7 +20,7 @@ public class SkinStorePanel : MonoBehaviour
     public Button conFirmButton;
 
     [SerializeField] Transform playerTrm;
-    [SerializeField] GameObject normalSkin;
+    public GameObject normalSkin;
 
     int index = 0;
 
@@ -29,7 +29,7 @@ public class SkinStorePanel : MonoBehaviour
     private void Start()
     {
         //ShowSideSkinImage();
-
+        playerControl = FindObjectOfType<PlayerControl>();
 
         GameManager.instance.SetPlayerPrefs(SkinKey + 0, 1);
 
@@ -128,9 +128,11 @@ public class SkinStorePanel : MonoBehaviour
         {
             skinObj[i].SetActive(false);
         }
-        playerControl.curPlayerObj = skinObj[index].transform;
+
         skinObj[index].SetActive(true);
+        playerControl.curPlayerObj = skinObj[index].transform;
     }
+
     /*
     void LeftMove(int index)
     {
