@@ -86,7 +86,7 @@ public class GroundManager : MonoBehaviour
                 }
                 r = Random.Range(0, groundCountByLevel[0]);
                 lastPos = lastPiece.transform.position;
-                nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
+                
                 break;
 
             case 1:
@@ -96,7 +96,6 @@ public class GroundManager : MonoBehaviour
                 }
                 r = Random.Range(0, groundCountByLevel[1]);
                 lastPos = lastPiece.transform.position;
-                nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
                 break;
 
             case 2:
@@ -106,7 +105,6 @@ public class GroundManager : MonoBehaviour
                 }
                 r = Random.Range(0, groundCountByLevel[2]);
                 lastPos = lastPiece.transform.position;
-                nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
                 break;
 
             case 3:
@@ -116,7 +114,6 @@ public class GroundManager : MonoBehaviour
                 }
                 r = Random.Range(0, groundCountByLevel[3]);
                 lastPos = lastPiece.transform.position;
-                nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
                 break;
 
             case 4:
@@ -126,7 +123,6 @@ public class GroundManager : MonoBehaviour
                 }
                 r = Random.Range(0, groundCountByLevel[4]);
                 lastPos = lastPiece.transform.position;
-                nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
                 break;
 
             default:
@@ -138,6 +134,7 @@ public class GroundManager : MonoBehaviour
                 break;
         }
 
+        nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
         lastPiece = nm.gameObject;
     }
 
