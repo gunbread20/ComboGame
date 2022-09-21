@@ -19,7 +19,8 @@ public class FeverManager : MonoBehaviour
     PlayerControl playerControl;
 
     [SerializeField] PlayerTrail trail;
-    [SerializeField] Slider feverBar;
+    [SerializeField] GameObject feverParent;
+    [SerializeField] Image feverBar;
     [SerializeField] Text feverText;
 
     private void Start()
@@ -38,13 +39,13 @@ public class FeverManager : MonoBehaviour
     {
         
         if (GameManager.instance.state == GameState.RUNNING)
-            feverBar.gameObject.SetActive(true);
+            feverParent.gameObject.SetActive(true);
         if (comboManager.feverComboCnt >= 10 * Time.timeScale && feverTime > 0 )
         {
             OnFever();
             trail.SetTrail(1f);
         }
-        else if (feverBar.value <= 0)
+        else if (feverBar.transform.localScale.x <= 0)
         {
             OffFever();
             trail.RemoveTrail(1f);
@@ -66,14 +67,15 @@ public class FeverManager : MonoBehaviour
 
         feverTime -= Time.deltaTime;
 
-        feverBar.value = feverTime / feverCurTime;
+        feverBar.transform.localScale = new Vector2(feverTime / feverCurTime, 1f);
 
         isInit = false;
     }
 
     public void ChargeFever()
     {
-        feverBar.value = comboManager.feverComboCnt / (10f * Time.timeScale);
+        feverBar.transform.localScale = new Vector2(comboManager.feverComboCnt / (10f * Time.timeScale), 1f);
+
     }
 
     public void OffFever()
@@ -83,6 +85,8 @@ public class FeverManager : MonoBehaviour
             feverTime = feverCurTime;
             playerControl.isInvincible = true;
             Invoke("InvincibleOff", playerControl.invincibleTime);
+            playerControl.InvincibleEffect();
+
             comboManager.feverComboCnt = 0;
         }
         Fever(false);
