@@ -17,6 +17,7 @@ public class GroundMove : MonoBehaviour
 
     ScoreManager scoreManager;
     PlayerControl playerControl;
+    FeverManager feverManager;
 
     public List<Vector3> objOriginPos = new List<Vector3>();
 
@@ -43,6 +44,7 @@ public class GroundMove : MonoBehaviour
         moveSpeed = GroundManager.Instance.speed;
         scoreManager = FindObjectOfType<ScoreManager>();
         playerControl = FindObjectOfType<PlayerControl>();
+        feverManager = FindObjectOfType<FeverManager>();
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -63,6 +65,15 @@ public class GroundMove : MonoBehaviour
         }
         else
         {
+            if(feverManager.offFeverTime < 3f)
+            {
+                time += Time.deltaTime;
+
+                feverSpeed = Mathf.Lerp(2.5f, 1f, time);
+                return;
+            }
+                
+
             feverSpeed = 1;
         }
 

@@ -9,6 +9,7 @@ public class FeverManager : MonoBehaviour
     ComboManager comboManager;
 
     public float feverTime = 5f;
+    public float offFeverTime = 0f;
     private float feverMinTime = 5f;
     private float feverCurTime = 5f;
     private float feverMaxTime = 15f;
@@ -17,6 +18,7 @@ public class FeverManager : MonoBehaviour
     bool isCanFever = true;
 
     PlayerControl playerControl;
+    GroundMove groundMove;
 
     [SerializeField] PlayerTrail trail;
     [SerializeField] GameObject feverParent;
@@ -77,6 +79,7 @@ public class FeverManager : MonoBehaviour
         feverBar.transform.localScale = new Vector2(comboManager.feverComboCnt / (10f * Time.timeScale), 1f);
 
     }
+    
 
     public void OffFever()
     {
@@ -89,6 +92,9 @@ public class FeverManager : MonoBehaviour
 
             comboManager.feverComboCnt = 0;
         }
+
+        offFeverTime += Time.deltaTime;
+
         Fever(false);
 
         isInit = true;

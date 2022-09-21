@@ -163,7 +163,6 @@ public class PlayerControl : MonoBehaviour
         {
             touchState = TouchStatus.DRAG;
             float ClickPosX = Camera.main.ScreenToViewportPoint(Input.mousePosition).x - widthHalf;
-            Debug.Log(ClickPosX);
             float widthLimit = 0.425f;
 
             if (Mathf.Abs(ClickPosX) <= Mathf.Abs(widthLimit))

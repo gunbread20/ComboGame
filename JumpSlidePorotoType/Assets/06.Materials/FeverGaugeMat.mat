@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FeverGaugeMat
-  m_Shader: {fileID: -6465566751694194690, guid: 9379af72e1dbe7744abf9ee0fc309299, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e3dd7f28a34e4994a86d3bfaa3dc0757, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,6 +33,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - InvincibleTex:
+        m_Texture: {fileID: 2800000, guid: d50b5feda72ef0040a1283386317296a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7f34e849c74148699822a9f4d463ad93:
         m_Texture: {fileID: 2800000, guid: d50b5feda72ef0040a1283386317296a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -94,13 +98,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Alpha: 1
+    - Vector1_232aa4e8165446c89b758076c9450fd5: 1
     - Vector1_45827309991644968239d21f5e5bf1e5: 1
+    - Vector1_4c45009ae97744349bad6c020551d9e6: 1
     - Vector1_5c2ba862a64e45a29a63e32f93811203: 45
+    - Vector1_9bbf72a792284e149a11d228216ef40c: 44
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorMask: 15
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -119,7 +127,13 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _Surface: 0
+    - _UseUIAlphaClip: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
