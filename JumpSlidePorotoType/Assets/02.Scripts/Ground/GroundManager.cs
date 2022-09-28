@@ -134,7 +134,7 @@ public class GroundManager : MonoBehaviour
                 break;
         }
 
-        nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.1f), true);
+        nm = groundPools[r].GetPoolObject(new Vector3(0, 0, groundSize + lastPos.z - 0.2f), true);
         lastPiece = nm.gameObject;
     }
 

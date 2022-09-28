@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundManager: {fileID: 0}
-  groundNum: 2
+  groundNum: 9
   moveSpeed: 0
   gemActive: 0
   gem:
@@ -524,8 +524,16 @@ PrefabInstance:
       value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: -7470389914349316467, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7470389914349316467, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7470389914349316467, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -7470389914349316467, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_LocalPosition.z
@@ -554,6 +562,10 @@ PrefabInstance:
     - target: {fileID: -7470389914349316467, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -6859069996854648682, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: -6859069996854648682, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_LocalPosition.x
@@ -616,8 +628,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 10c066c5ea71fd9438086cec2aeb84f6, type: 2}
     - target: {fileID: 4369969193304614134, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369969193304614134, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369969193304614134, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4369969193304614134, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_LocalPosition.z
@@ -650,6 +670,10 @@ PrefabInstance:
     - target: {fileID: 7263391036840752272, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_TagString
       value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282140517929528065, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 8282140517929528065, guid: e0aecc927332a394ca342e5d0f48a746, type: 3}
       propertyPath: m_LocalPosition.x

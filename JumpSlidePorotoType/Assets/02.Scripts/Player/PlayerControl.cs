@@ -156,7 +156,7 @@ public class PlayerControl : MonoBehaviour
             touchState = TouchStatus.NONE;
             PlayerMovement(TouchStatus.NONE, 0);
         }*/
-
+//#if UNITY_EDITOR
         float widthHalf =  0.5f;
 
         if (Input.GetMouseButton(0))
@@ -183,6 +183,7 @@ public class PlayerControl : MonoBehaviour
             touchState = TouchStatus.NONE;
             PlayerMovement(TouchStatus.NONE, 0);
         }
+//#endif
     }
 
     private void StartJumpCancle()
@@ -201,13 +202,14 @@ public class PlayerControl : MonoBehaviour
         {
             float way = Mathf.Sign(playerX - transform.position.x);
             float xSpeed = way * speed * Time.deltaTime;
-            float sensivity = 0.1f;
+            float sensivity = 0.03f * Time.timeScale;
 
             if (Mathf.Abs(playerX - transform.position.x) > sensivity)
             {
                 if (Mathf.Abs(transform.position.x + xSpeed) <= sideLength)
                 {
-                    transform.position += new Vector3(xSpeed, 0, 0);
+                    float xpos = Mathf.Lerp(transform.position.x, playerX, speed * Time.deltaTime);
+                    transform.position = new Vector3(xpos, transform.position.y, transform.position.z);
                 }
                 else
                 {

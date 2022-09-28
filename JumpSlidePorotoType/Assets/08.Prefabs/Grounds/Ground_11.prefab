@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundManager: {fileID: 0}
-  groundNum: 2
+  groundNum: 11
   moveSpeed: 0
   gemActive: 0
   gem:
@@ -123,7 +123,10 @@ MonoBehaviour:
   - {fileID: 345071105498355808}
   - {fileID: 4116560194415489158}
   - {fileID: 4938738927618005898}
+  allChild: []
+  allRigid: []
   objOriginPos: []
+  objOriginRot: []
 --- !u!1 &8171837551253807961
 GameObject:
   m_ObjectHideFlags: 0

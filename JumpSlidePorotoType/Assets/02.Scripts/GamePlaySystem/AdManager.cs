@@ -25,9 +25,9 @@ public class AdManager : MonoBehaviour
 #if UNITY_ANDROID
         string restartAdID = "ca-app-pub-3940256099942544/5354046379";
 #elif UNITY_IPHONE
-        string restartAdID = "ca-app-pub-3940256099942544/5354046379";
+        string restartAdID = "ca-app-pub-3688587815421766/5887004193";
 #else
-        string restartAdID = "ca-app-pub-3940256099942544/5354046379";
+        string restartAdID = "ca-app-pub-3688587815421766/5887004193";
 #endif
 
         //단일 OS일 경우 여기서 바로 스트링으로 꽂아줘도 가능
