@@ -12,7 +12,6 @@ public class StartTapPanel : MonoBehaviour
 
     SkinStorePanel skinStorePanel;
 
-    public Text exceptionText;
     private void Awake()
     {
         _btnStart.onClick.AddListener(GameStart);
@@ -22,14 +21,7 @@ public class StartTapPanel : MonoBehaviour
     public void GameStart()
     {
         if (skinStorePanel.normalSkin == null)
-        {
-            DOTween.Kill(exceptionText);
-            exceptionText.DOFade(1, 0.2f).OnComplete(() =>
-            {
-                exceptionText.DOFade(0, 1.5f);
-            });
             return;
-        }
         else
         {
             for (int i = 0; i < skinStorePanel.skinObj.Count; i++)

@@ -19,8 +19,10 @@ public class GroundMove : MonoBehaviour
     PlayerControl playerControl;
     FeverManager feverManager;
 
+    public Transform[] allChild;
+    public Rigidbody[] allRigid;
     public List<Vector3> objOriginPos = new List<Vector3>();
-
+    public List<Vector3> objOriginRot = new List<Vector3>();
     float feverSpeed;
     float slowTime;
     float time;
@@ -46,9 +48,14 @@ public class GroundMove : MonoBehaviour
         playerControl = FindObjectOfType<PlayerControl>();
         feverManager = FindObjectOfType<FeverManager>();
 
-        for (int i = 0; i < transform.childCount; i++)
+        
+        allChild = GetComponentsInChildren<Transform>();
+        allRigid = GetComponentsInChildren<Rigidbody>();
+
+        for (int i = 1; i < allChild.Length; i++)
         {
-            objOriginPos.Add(transform.GetChild(i).transform.localPosition);
+            objOriginPos.Add(allChild[i].localPosition);
+            objOriginRot.Add(allChild[i].localRotation.eulerAngles);
         }
     }
 
@@ -90,15 +97,26 @@ public class GroundMove : MonoBehaviour
         if (transform.position.z <= -10)
         {
             GroundManager.Instance.SpawnGround();
-            gameObject.SetActive(false);
 
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 1; i < allChild.Length; i++)
             {
-                transform.GetChild(i).transform.localPosition = objOriginPos[i];
-                if (transform.GetChild(i).GetComponent<Rigidbody>() == null)
-                    return;
-                transform.GetChild(i).GetComponent<Rigidbody>().velocity = Vector3.zero;
+                allChild[i].localPosition = objOriginPos[i - 1];
+                allChild[i].localEulerAngles = objOriginRot[i - 1];
             }
+
+            for (int i = 0; i < allRigid.Length; i++)
+            {
+                if (allRigid.Length != 0)
+                {
+                    allRigid[i].velocity = Vector3.zero;
+                    allRigid[i].angularVelocity = Vector3.zero;
+                }
+            }
+
+
+                gameObject.SetActive(false);
+
+            
         }
     }
 
