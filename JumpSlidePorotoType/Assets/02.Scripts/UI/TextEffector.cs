@@ -34,25 +34,19 @@ public class TextEffector : MonoBehaviour
         text.ForceMeshUpdate();
 
         float timer = 0f;
-        float offset = 0f;
-        while (timer <= 6.28319f)
+
+        AnimCharInfo[] animCharArr = new AnimCharInfo[text.textInfo.characterInfo.Length];
+
+        for (int i = 0; i < text.textInfo.characterInfo.Length; i++)
+        {
+            animCharArr[i] = new AnimCharInfo(text.textInfo.characterInfo[i], text);
+        }
+
+        while (timer <= Mathf.Deg2Rad * 360f)
         {
             for (int i = 0; i < text.textInfo.characterInfo.Length; i++)
             {
-                Debug.Log(offset);
-
-                TMP_CharacterInfo charInfo = text.textInfo.characterInfo[i];
-                if (charInfo.isVisible)
-                {
-                    Vector3[] vertices = text.textInfo.meshInfo[charInfo.materialReferenceIndex].vertices;
-                    offset = Mathf.Sin(timer + charInfo.vertexIndex * 0.05f);
-
-                    for (int j = 0; j < 4; j++)
-                    {
-                        Vector3 origin = vertices[charInfo.vertexIndex + j];
-                        vertices[charInfo.vertexIndex + j] = origin + Vector3.up * offset;
-                    }
-                }
+                animCharArr[i].SetUpdatePos(timer);
             }
 
             for (int i = 0; i < text.textInfo.meshInfo.Length; i++)
@@ -62,9 +56,53 @@ public class TextEffector : MonoBehaviour
                 text.UpdateGeometry(meshInfo.mesh, i);
             }
 
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * 4;
 
             yield return null;
+        }
+    }
+}
+
+public class AnimCharInfo
+{
+    bool isMoveOver = false;
+
+    public TMP_CharacterInfo _charInfo;
+    public TMP_Text _myText;
+
+    public Vector3[] _verticesOriginPos;
+    public Vector3[] _vertices;
+
+    public float _offset;
+
+
+    public AnimCharInfo(TMP_CharacterInfo charInfo, TMP_Text text)
+    {
+        _charInfo = charInfo;
+        _vertices = text.textInfo.meshInfo[charInfo.materialReferenceIndex].vertices;
+        _verticesOriginPos = text.textInfo.meshInfo[charInfo.materialReferenceIndex].vertices;
+        _myText = text;
+    }
+
+    public void SetUpdatePos(float time)
+    {
+        if (!_charInfo.isVisible || isMoveOver)
+            return;
+
+        _offset = Mathf.Sin(time + _charInfo.vertexIndex * 0.025f) * 4;
+
+        for (int i = 0; i < 4; i++)
+        {
+            int curIdx = _charInfo.vertexIndex + i;
+
+            Vector3 origin = _vertices[_charInfo.vertexIndex + i];
+            _vertices[curIdx] = origin + Vector3.up * _offset;
+
+            if ((_vertices[curIdx] - _verticesOriginPos[curIdx]).magnitude <= 0.6f || _vertices[curIdx].y < _verticesOriginPos[curIdx].y)
+            {
+                _vertices[curIdx] = _verticesOriginPos[curIdx];
+                isMoveOver = true;
+            }
         }
     }
 }
