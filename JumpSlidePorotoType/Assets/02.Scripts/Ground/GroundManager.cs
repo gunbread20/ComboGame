@@ -20,7 +20,7 @@ public class GroundManager : MonoBehaviour
     public float addTimeSpeed = 0.1f;
     public float feverSlowTime = 1;
 
-    private GameObject lastPiece;
+    public GameObject lastPiece;
 
     public float groundSize;
     public int groundCount = 3;
